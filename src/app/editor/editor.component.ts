@@ -12,8 +12,9 @@ export class EditorComponent implements OnInit{
   quillForm!:FormGroup;
   contentgiven!:string;
   changeEditor(event : EditorChangeContent | EditorChangeSelection){
-    console.log(event);
+    // console.log(event);
     this.contentgiven=event['editor']['root']['innerHTML'];
+    console.log(this.quillForm.get('editor')?.value);
   }
   editorStyle={
     height:'300px',
