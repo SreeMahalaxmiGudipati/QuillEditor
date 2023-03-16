@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 
 @Component({
   selector: 'app-editor',
@@ -10,18 +11,22 @@ export class EditorComponent implements OnInit{
 
   quillForm!:FormGroup;
   contentgiven!:string;
-
+  changeEditor(event : EditorChangeContent | EditorChangeSelection){
+    console.log(event);
+    this.contentgiven=event['editor']['root']['innerHTML'];
+  }
   editorStyle={
     height:'300px',
     backgroundColor: 'white'
   }
   ngOnInit(){
+   
     this.quillForm=new  FormGroup({
       'editor':new FormControl(null)
     });
+   
   }
   Onsubmit(){
-    this.contentgiven=this.quillForm.get('editor')?.value;
-    console.log(this.quillForm.get('editor')?.value);
+    // console.log(this.quillForm.get('editor')?.value);
   }
 }
