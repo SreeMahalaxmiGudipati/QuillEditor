@@ -31,12 +31,12 @@ export class EditorComponent implements OnInit{
   copyContentwithSourceCode(){
   const  preview = document.createElement('div');
   preview.innerHTML = this.contentgiven;
-  const html = preview.innerHTML;
+ const html = preview.innerHTML;
   const temparea = document.createElement('textarea');
-  temparea.textContent = html;
+ temparea.textContent = html;
   document.body.appendChild(temparea);
-  temparea.select();
-  document.execCommand('copy');
+ temparea.select();
+ document.execCommand('copy');
   document.body.removeChild(temparea);
   }
 
