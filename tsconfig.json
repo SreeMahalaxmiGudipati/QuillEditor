@@ -25,6 +25,7 @@
       "dom"
     ]
   },
+  "types": ["jquery"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

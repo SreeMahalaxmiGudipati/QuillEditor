@@ -5,11 +5,13 @@ import { QuillModule } from 'ngx-quill';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditorComponent } from './editor/editor.component';
+import { SummernoteComponent } from './summernote/summernote.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EditorComponent
+    EditorComponent,
+    SummernoteComponent,
   ],
   imports: [
     FormsModule,
