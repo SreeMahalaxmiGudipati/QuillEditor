@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-
 declare var $: any;
 
 @Component({
@@ -9,7 +8,7 @@ declare var $: any;
   styleUrls: ['./summernote.component.css']
 })
 export class SummernoteComponent implements OnInit {
-  
+
   content = '';
   editorContent!: string ;
 
@@ -30,18 +29,22 @@ export class SummernoteComponent implements OnInit {
   }
  
   copyContent(){
+
     const preview = document.createElement('div');
   preview.innerHTML = this.editorContent;
   document.body.appendChild(preview);
-           const range = document.createRange();
+  const range = document.createRange();
   range.selectNodeContents(preview);
+  
   const selection = window.getSelection();
    selection?.removeAllRanges();
    selection?.addRange(range);
   document.execCommand('copy');
   document.body.removeChild(preview);
   }
+
   copyContentwithSourceCode(){
+
     const  preview = document.createElement('div');
     preview.innerHTML = this.editorContent;
    const html = preview.innerHTML;
