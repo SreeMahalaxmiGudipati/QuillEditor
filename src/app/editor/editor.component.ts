@@ -27,7 +27,16 @@ export class EditorComponent implements OnInit{
     });
    
   }
-  Onsubmit(){
-    // console.log(this.quillForm.get('editor')?.value);
+
+  copyContent(){
+  const  preview = document.createElement('div');
+  preview.innerHTML = this.contentgiven;
+  const html = preview.innerHTML;
+  const temparea = document.createElement('textarea');
+  temparea.textContent = html;
+  document.body.appendChild(temparea);
+  temparea.select();
+  document.execCommand('copy');
+  document.body.removeChild(temparea);
   }
 }
