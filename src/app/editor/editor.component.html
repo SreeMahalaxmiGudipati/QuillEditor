@@ -11,8 +11,9 @@
                     <quill-editor [style]="editorStyle" formControlName="editor" (onEditorChanged)="changeEditor($event)"></quill-editor>
                 </div>
                <br>
-                <button (click)="copyContent()" class="btn btn-primary">Copy content</button><br>
-                <br>
+               <button (click)="copyContent()" class="btn btn-primary">Copy content</button><br>
+               <br>
+                <button (click)="copyContentwithSourceCode()" class="btn btn-primary">Copy with Sourcecode</button><br>
             </form>
         </div>
         <div class="col-md-4 bg-white p-4 border">

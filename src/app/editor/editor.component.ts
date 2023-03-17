@@ -28,7 +28,7 @@ export class EditorComponent implements OnInit{
    
   }
 
-  copyContent(){
+  copyContentwithSourceCode(){
   const  preview = document.createElement('div');
   preview.innerHTML = this.contentgiven;
   const html = preview.innerHTML;
@@ -38,5 +38,19 @@ export class EditorComponent implements OnInit{
   temparea.select();
   document.execCommand('copy');
   document.body.removeChild(temparea);
+  }
+
+  copyContent(){
+    
+    const preview = document.createElement('div');
+  preview.innerHTML = this.contentgiven;
+  document.body.appendChild(preview);
+           const range = document.createRange();
+  range.selectNodeContents(preview);
+  const selection = window.getSelection();
+   selection?.removeAllRanges();
+   selection?.addRange(range);
+  document.execCommand('copy');
+  document.body.removeChild(preview);
   }
 }
