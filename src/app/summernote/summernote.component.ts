@@ -16,9 +16,14 @@ export class SummernoteComponent implements OnInit {
   ngOnInit(): void {
     $('#summernote').summernote(
       {
+        // callbacks: {
+        //   onChange: (content: string, $editable: any) => {
+        //     this.editorContent = content;
+        //   }
+        // },
         callbacks: {
           onChange: (content: string, $editable: any) => {
-            this.editorContent = content;
+            $('#preview').html(content);
           }
         },
         height: 400,
