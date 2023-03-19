@@ -26,6 +26,8 @@ export class SummernoteComponent implements OnInit {
       },
      
     );
+    
+
   }
  
   copyContent(){
@@ -41,6 +43,7 @@ export class SummernoteComponent implements OnInit {
    selection?.addRange(range);
   document.execCommand('copy');
   document.body.removeChild(preview);
+  localStorage.setItem("myString", this.editorContent);
   }
 
   copyContentwithSourceCode(){
@@ -55,9 +58,6 @@ export class SummernoteComponent implements OnInit {
    document.execCommand('copy');
     document.body.removeChild(temparea);
   }
-
-
  
-
   
 }
