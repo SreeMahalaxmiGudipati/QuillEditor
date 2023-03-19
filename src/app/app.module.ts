@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditorComponent } from './editor/editor.component';
 import { SummernoteComponent } from './summernote/summernote.component';
+import { PreviewComponent } from './preview/preview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EditorComponent,
     SummernoteComponent,
+    PreviewComponent,
   ],
   imports: [
     FormsModule,
