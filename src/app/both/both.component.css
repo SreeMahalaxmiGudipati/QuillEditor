@@ -1,0 +1,12 @@
+.main{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0px;
+}
+.child-component {
+  border: 1px solid black;
+  height:104%;
+}
+h3{
+    text-align: center;
+}

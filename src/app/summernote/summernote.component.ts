@@ -11,19 +11,19 @@ export class SummernoteComponent implements OnInit {
 
   content = '';
   editorContent!: string ;
+  previewContent!:string;
 
 
   ngOnInit(): void {
     $('#summernote').summernote(
       {
-        // callbacks: {
-        //   onChange: (content: string, $editable: any) => {
-        //     this.editorContent = content;
-        //   }
-        // },
         callbacks: {
           onChange: (content: string, $editable: any) => {
-            $('#preview').html(content);
+           $('#preview').html(content);
+          this.previewContent = $('#preview').val(content);
+          const storageString = JSON.stringify(this.previewContent);
+          console.log(storageString);
+          localStorage.setItem('Preview Content', storageString);
           }
         },
         height: 400,
@@ -48,7 +48,8 @@ export class SummernoteComponent implements OnInit {
    selection?.addRange(range);
   document.execCommand('copy');
   document.body.removeChild(preview);
-  localStorage.setItem("myString", this.editorContent);
+  console.log(this.previewContent);
+
   }
 
   copyContentwithSourceCode(){

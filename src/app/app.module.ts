@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { EditorComponent } from './editor/editor.component';
 import { SummernoteComponent } from './summernote/summernote.component';
 import { PreviewComponent } from './preview/preview.component';
+import { BothComponent } from './both/both.component';
+import { SummernoteEditorComponent } from './summernote-editor/summernote-editor.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { PreviewComponent } from './preview/preview.component';
     EditorComponent,
     SummernoteComponent,
     PreviewComponent,
+    BothComponent,
+    SummernoteEditorComponent,
   ],
   imports: [
     FormsModule,

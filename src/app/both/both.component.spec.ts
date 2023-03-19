@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SummereditorComponent } from './summereditor.component';
+import { BothComponent } from './both.component';
 
-describe('SummereditorComponent', () => {
-  let component: SummereditorComponent;
-  let fixture: ComponentFixture<SummereditorComponent>;
+describe('BothComponent', () => {
+  let component: BothComponent;
+  let fixture: ComponentFixture<BothComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SummereditorComponent ]
+      declarations: [ BothComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SummereditorComponent);
+    fixture = TestBed.createComponent(BothComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
