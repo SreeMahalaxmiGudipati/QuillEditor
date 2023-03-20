@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { User } from '../model/user.model';
 declare var $: any;
 
 @Component({
@@ -10,6 +12,21 @@ export class SummernoteEditorComponent implements OnInit{
 
   editorContent!: string;
   previewContent!:string;
+
+  user = new User();
+
+  public UserForm=new FormGroup({
+
+    FirstName:new FormControl(''),
+    LastName:new FormControl(),
+    
+   });
+
+   save(){
+    
+    console.log(this.user.firstname);
+    console.log(this.user.lastname);
+   }
 
   ngOnInit(): void {
 
@@ -37,9 +54,9 @@ export class SummernoteEditorComponent implements OnInit{
    var obj=JSON.parse(str);
    console.log(obj); 
    console.log(obj[0].value);
+
     if(value1){
      $('#previewprevious').html(obj[0].value);
-
     }
    
 

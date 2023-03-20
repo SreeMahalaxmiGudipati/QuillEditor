@@ -7,3 +7,27 @@
 <button (click)="copyContentwithSourceCode()" class="btn btn-primary">Copy with Sourcecode</button>
 <br><br>
 
+<form [formGroup]="UserForm"  (ngSubmit)="save()">
+    <table>
+        <tr>
+            <td>FirstName :</td>
+            <td>
+                <input type="text" name="firstname" [(ngModel)]="user.firstname">
+            </td>
+        </tr>
+        <tr>
+          <td>LastName :</td>
+          <td>
+              <input type="text"  name="lastname" [(ngModel)]="user.lastname" >
+          </td>
+      </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <button type="submit" value="SAVE" class="btn btn-primary">SAVE</button>
+                <br><br>
+               
+            </td>
+        </tr>
+    </table>
+    </form>
