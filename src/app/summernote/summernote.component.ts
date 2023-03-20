@@ -20,10 +20,10 @@ export class SummernoteComponent implements OnInit {
         callbacks: {
           onChange: (content: string, $editable: any) => {
            $('#preview').html(content);
-          this.previewContent = $('#preview').val(content);
-          const storageString = JSON.stringify(this.previewContent);
-          console.log(storageString);
-          localStorage.setItem('Preview Content', storageString);
+          // this.previewContent = $('#preview').val(content);
+          // const storageString = JSON.stringify(this.previewContent);
+          // console.log(storageString);
+          // localStorage.setItem('Preview Content', storageString);
           }
         },
         height: 400,

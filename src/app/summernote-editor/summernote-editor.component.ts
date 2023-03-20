@@ -9,6 +9,7 @@ declare var $: any;
 export class SummernoteEditorComponent implements OnInit{
 
   editorContent!: string;
+  previewContent!:string;
   
 
   ngOnInit(): void {
@@ -18,6 +19,10 @@ export class SummernoteEditorComponent implements OnInit{
         callbacks: {
           onChange: (content: string, $editable: any) => {
            $('#preview').html(content);
+           this.previewContent = $('#preview').val(content);
+          const storageString = JSON.stringify(this.previewContent);
+          console.log(storageString);
+          localStorage.setItem('Preview Content', storageString); 
           }
         },
       height: 350,
@@ -25,7 +30,9 @@ export class SummernoteEditorComponent implements OnInit{
       },
      
     );
-    
+    const value = localStorage.getItem('Preview Content');
+    console.log(value);
+    $('#summernote').html(value);
 
   }
 
@@ -37,6 +44,7 @@ export class SummernoteEditorComponent implements OnInit{
     tempTextArea.select();
     document.execCommand('copy');
     tempTextArea.remove();
+    
 
   }
 
