@@ -7,7 +7,7 @@
 <button (click)="copyContentwithSourceCode()" class="btn btn-primary">Copy with Sourcecode</button>
 <br><br>
 
-<form [formGroup]="UserForm"  (ngSubmit)="save()">
+<form >
     <table>
         <tr>
             <td>FirstName :</td>
@@ -24,10 +24,11 @@
         <tr>
             <td>&nbsp;</td>
             <td>
-                <button type="submit" value="SAVE" class="btn btn-primary">SAVE</button>
+                <button type="submit" value="SAVE" class="btn btn-primary" (click)="save()">SAVE</button>
                 <br><br>
-               
             </td>
         </tr>
     </table>
     </form>
+
+    

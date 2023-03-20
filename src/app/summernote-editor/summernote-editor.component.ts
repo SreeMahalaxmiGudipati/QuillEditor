@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { User } from '../model/user.model';
+import { UserService } from '../user.service';
 declare var $: any;
 
 @Component({
@@ -12,20 +13,17 @@ export class SummernoteEditorComponent implements OnInit{
 
   editorContent!: string;
   previewContent!:string;
+  constructor(public userService:UserService){
+
+  }
 
   user = new User();
 
-  public UserForm=new FormGroup({
-
-    FirstName:new FormControl(''),
-    LastName:new FormControl(),
-    
-   });
-
    save(){
-    
     console.log(this.user.firstname);
     console.log(this.user.lastname);
+    this.userService.fn=this.user.firstname;
+    this.userService.ln=this.user.lastname;
    }
 
   ngOnInit(): void {

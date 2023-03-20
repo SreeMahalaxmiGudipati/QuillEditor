@@ -5,5 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
 
-  constructor() { }
+  fn!:string;
+  ln!:string;
+
+  constructor() {
+    console.log(this.fn);
+    console.log(this.ln);
+   }
+
+
 }
