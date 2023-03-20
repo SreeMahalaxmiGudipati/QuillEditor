@@ -35,12 +35,10 @@ export class SummernoteEditorComponent implements OnInit{
    let str = value1;
    str = String(str);
    var obj=JSON.parse(str);
-   console.log(obj);
-    console.log(typeof(value1));
-   // let [key, value] = Object.entries(value1)[0];
-   
+   console.log(obj); 
+   console.log(obj[0].value);
     if(value1){
-     $('#previewprevious').html(value1);
+     $('#previewprevious').html(obj[0].value);
 
     }
    
