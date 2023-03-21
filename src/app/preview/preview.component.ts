@@ -15,7 +15,6 @@ export class PreviewComponent implements OnInit{
 
   }
   ngOnInit(){
-    console.log(this.user.firstname);
-    console.log(this.user.lastname);
+    
   }
 }

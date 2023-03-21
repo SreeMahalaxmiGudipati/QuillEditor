@@ -31,20 +31,25 @@ export class SummernoteEditorComponent implements OnInit{
     $('#summernote').summernote(
       {
         callbacks: {
+          onInit: function() {
+            $('#summernote').summernote('code', '<div id="op-firstname">FirstName</div><div><b><br></b></div><div><b><br></b></div><div><b><i>LastName</i></b></div>');
+            $('#summernote').summernote('codeview.activate');
+          },
           onChange: (content: string, $editable: any) => {
            $('#preview').html(content);
            this.previewContent = $('#preview').val(content);
            console.log(typeof(this.previewContent));
           const storageString = JSON.stringify(this.previewContent);
           console.log(storageString);
-          localStorage.setItem('Preview Content', storageString); 
-          }
+          localStorage.setItem('Preview Content', storageString);          
+          },
         },
       height: 350,
        width:800
       },
      
     );
+
     let value1 = localStorage.getItem('Preview Content');
     console.log(value1);
    let str = value1;
@@ -57,7 +62,6 @@ export class SummernoteEditorComponent implements OnInit{
      $('#previewprevious').html(obj[0].value);
     }
    
-
   }
 
   copyContent(){

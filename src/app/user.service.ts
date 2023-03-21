@@ -9,8 +9,7 @@ export class UserService {
   ln!:string;
 
   constructor() {
-    console.log(this.fn);
-    console.log(this.ln);
+    
    }
 
 
