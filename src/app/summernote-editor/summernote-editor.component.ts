@@ -13,6 +13,8 @@ export class SummernoteEditorComponent implements OnInit{
 
   editorContent!: string;
   previewContent!:string;
+  SourcecodeInEditor!:string;
+
   constructor(public userService:UserService){
 
   }
@@ -32,16 +34,24 @@ export class SummernoteEditorComponent implements OnInit{
       {
         callbacks: {
           onInit: function() {
-            $('#summernote').summernote('code', '<div id="op-firstname">FirstName</div><div><b><br></b></div><div><b><br></b></div><div><b><i>LastName</i></b></div>');
+            $('#summernote').summernote('code', '<div id="op-firstname">FirstName</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">LastName</i></b></div>');
             $('#summernote').summernote('codeview.activate');
           },
           onChange: (content: string, $editable: any) => {
            $('#preview').html(content);
            this.previewContent = $('#preview').val(content);
-           console.log(typeof(this.previewContent));
+      //     console.log(typeof(this.previewContent));
           const storageString = JSON.stringify(this.previewContent);
-          console.log(storageString);
-          localStorage.setItem('Preview Content', storageString);          
+      //    console.log(storageString);
+          localStorage.setItem('Preview Content', storageString);  
+
+          let SourceCode = $('<div>').html(content);
+           let first =SourceCode.find("#op-firstname");
+          let last =SourceCode.find('#op-lastname');
+
+          $('#firstname').val(first.text());
+           $('#lastname').val(last.text());        
+         
           },
         },
       height: 350,
@@ -51,24 +61,24 @@ export class SummernoteEditorComponent implements OnInit{
       $('#firstname').on('input',()=>{
       let fn = $('#firstname').val();
     let ln = $('#lastname').val();
-    let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i>${ ln }</i></b></div>`;
+    let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">${ ln }</i></b></div>`;
     $('#summernote').summernote('code',template);
         }),
 
     $('#lastname').on('input',()=>{
       let fn = $('#firstname').val();
         let ln = $('#lastname').val();
-        let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i>${ ln }</i></b></div>`;
+        let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">${ ln }</i></b></div>`;
         $('#summernote').summernote('code',template);
       })
     );
 
     let value1 = localStorage.getItem('Preview Content');
-    console.log(value1);
+  //  console.log(value1);
    let str = value1;
    str = String(str);
    var obj=JSON.parse(str);
-   console.log(obj); 
+ //  console.log(obj); 
    console.log(obj[0].value);
 
     if(value1){
@@ -107,8 +117,5 @@ export class SummernoteEditorComponent implements OnInit{
     tempTextArea.remove();
    
   }
-}
-function ChangeContentInSummernote() {
-  throw new Error('Function not implemented.');
 }
 
