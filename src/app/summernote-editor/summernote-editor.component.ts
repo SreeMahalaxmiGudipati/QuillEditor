@@ -47,7 +47,20 @@ export class SummernoteEditorComponent implements OnInit{
       height: 350,
        width:800
       },
-     
+
+      $('#firstname').on('input',()=>{
+      let fn = $('#firstname').val();
+    let ln = $('#lastname').val();
+    let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i>${ ln }</i></b></div>`;
+    $('#summernote').summernote('code',template);
+        }),
+
+    $('#lastname').on('input',()=>{
+      let fn = $('#firstname').val();
+        let ln = $('#lastname').val();
+        let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i>${ ln }</i></b></div>`;
+        $('#summernote').summernote('code',template);
+      })
     );
 
     let value1 = localStorage.getItem('Preview Content');
@@ -62,6 +75,13 @@ export class SummernoteEditorComponent implements OnInit{
      $('#previewprevious').html(obj[0].value);
     }
    
+  }
+
+  ChangeContentInSummernote() {
+  let fn = $('#firstname').val();
+    let ln = $('#lastname').val();
+    let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i>${ ln }</i></b></div>`;
+    $('#summernote').summernote('code',template);
   }
 
   copyContent(){
@@ -88,3 +108,7 @@ export class SummernoteEditorComponent implements OnInit{
    
   }
 }
+function ChangeContentInSummernote() {
+  throw new Error('Function not implemented.');
+}
+

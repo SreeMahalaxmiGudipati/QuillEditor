@@ -12,19 +12,20 @@
         <tr>
             <td>FirstName :</td>
             <td>
-                <input type="text" name="firstname" [(ngModel)]="user.firstname">
+                <input type="text" name="firstname" id="firstname" [(ngModel)]="user.firstname">
             </td>
         </tr>
         <tr>
           <td>LastName :</td>
           <td>
-              <input type="text"  name="lastname" [(ngModel)]="user.lastname" >
+              <input type="text"  name="lastname" id="lastname" [(ngModel)]="user.lastname" >
           </td>
       </tr>
         <tr>
             <td>&nbsp;</td>
             <td>
-                <button type="submit" value="SAVE" class="btn btn-primary" (click)="save()">SAVE</button>
+                <!-- <button type="submit" value="SAVE" class="btn btn-primary" (click)="save()">SAVE</button> -->
+                <button type="submit" value="SAVE" class="btn btn-primary" (click)="ChangeContentInSummernote()">SAVE</button>
                 <br><br>
             </td>
         </tr>
