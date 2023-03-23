@@ -26,14 +26,16 @@ export class SummernoteEditorComponent implements OnInit{
       lastName: ['']
     });
     
+    let template='<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
+  //  let template='<div id="op-firstname">Firstname</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">LastName</i></b></div>';
+
     $('#summernote').summernote(
       {
         callbacks: {
           onInit: function() {
-          var existingTemplate=false;
-        //    $('#summernote').summernote('code', '<div id="op-firstname">Firstname</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">LastName</i></b></div>');
-        $('#summernote').summernote('code', '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>');
-        $('#summernote').summernote('codeview.activate');
+        $('#summernote').summernote('code', template);
+        $('#summernote').summernote('disable');
+    //    $('#summernote').summernote('codeview.activate');
           },
           onChange: (content: string, $editable: any) => {
            $('#preview').html(content);
@@ -53,8 +55,7 @@ export class SummernoteEditorComponent implements OnInit{
         },
         
       height: 350,
-       width:800,
-      disable:true
+       width:800
       },
 
            $('#firstname, #lastname').on('input',()=>{
@@ -91,8 +92,6 @@ export class SummernoteEditorComponent implements OnInit{
             $('#summernote').summernote('code', template);
           }),
      
-     
-        
 
     //   $('#firstname').on('input',()=>{
     //   let fn = $('#firstname').val();
