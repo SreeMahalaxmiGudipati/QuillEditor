@@ -11,18 +11,13 @@ declare var $: any;
 })
 export class SummernoteEditorComponent implements OnInit{
 
-
   nameForm!: FormGroup;
-
 
   editorContent!: string;
   previewContent!:string;
   SourcecodeInEditor!:string;
 
-  constructor(public userService:UserService,private formBuilder: FormBuilder){
-
-  }
-
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
 
@@ -35,44 +30,85 @@ export class SummernoteEditorComponent implements OnInit{
       {
         callbacks: {
           onInit: function() {
-            $('#summernote').summernote('code', '<div id="op-firstname">FirstName</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">LastName</i></b></div>');
-            $('#summernote').summernote('codeview.activate');
+        //    $('#summernote').summernote('code', '<div id="op-firstname">Firstname</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">LastName</i></b></div>');
+        $('#summernote').summernote('code', '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>');
+        $('#summernote').summernote('codeview.activate');
           },
           onChange: (content: string, $editable: any) => {
            $('#preview').html(content);
            this.previewContent = $('#preview').val(content);
-      //     console.log(typeof(this.previewContent));
           const storageString = JSON.stringify(this.previewContent);
-      //    console.log(storageString);
           localStorage.setItem('Preview Content', storageString);  
 
-          let SourceCode = $('<div>').html(content);
-           let first =SourceCode.find("#op-firstname");
-          let last =SourceCode.find('#op-lastname');
+          // let SourceCode = $('<div>').html(content);
+          //  let first =SourceCode.find("#op-firstname");
+          // let last =SourceCode.find('#op-lastname');
 
-          $('#firstname').val(first.text());
-           $('#lastname').val(last.text());        
-         
+          // $('#firstname').val(first.text());
+          //  $('#lastname').val(last.text());       
+          
+     
           },
+
         },
+        
       height: 350,
-       width:800
+       width:800,
+   //    disable:true
       },
 
-      $('#firstname').on('input',()=>{
-      let fn = $('#firstname').val();
-    let ln = $('#lastname').val();
-    let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">${ ln }</i></b></div>`;
-    $('#summernote').summernote('code',template);
-        }),
+           $('#firstname, #lastname').on('input',()=>{
 
-    $('#lastname').on('input',()=>{
-      let fn = $('#firstname').val();
-        let ln = $('#lastname').val();
-        let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">${ ln }</i></b></div>`;
-        $('#summernote').summernote('code',template);
-      })
-    );
+            var pattern = /{{\s*(\w+)\s*}}/g;
+
+       let template='<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
+            var matches = template.match(pattern);
+            console.log(matches);
+            if (matches) {
+              matches.forEach((match) => {
+                var variable = match.replace('{{', '').replace('}}', '').trim();
+                // console.log(variable);
+                // console.log(match);
+
+                if (variable === 'firstname1') {
+                  
+                 let fn = $('#firstname').val();
+                 console.log(fn);
+                  
+                 template = template.replace(match, fn);
+
+              }
+              if (variable === 'lastname1') {
+                  
+                let ln = $('#lastname').val();
+                console.log(ln);
+                 
+                template = template.replace(match, ln);
+             }
+              })
+            }
+          
+            $('#summernote').summernote('code', template);
+          }),
+     
+     
+        
+
+    //   $('#firstname').on('input',()=>{
+    //   let fn = $('#firstname').val();
+    // let ln = $('#lastname').val();
+    // let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">${ ln }</i></b></div>`;
+    // $('#summernote').summernote('code',template);
+    //     }),
+
+    // $('#lastname').on('input',()=>{
+    //   let fn = $('#firstname').val();
+    //     let ln = $('#lastname').val();
+    //     let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">${ ln }</i></b></div>`;
+    //     $('#summernote').summernote('code',template);
+    //   })
+      
+      );
 
     let value1 = localStorage.getItem('Preview Content');
   //  console.log(value1);
@@ -104,7 +140,6 @@ export class SummernoteEditorComponent implements OnInit{
     document.execCommand('copy');
     tempTextArea.remove();
     
-
   }
 
   copyContentwithSourceCode(){
