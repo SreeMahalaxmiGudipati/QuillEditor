@@ -30,6 +30,7 @@ export class SummernoteEditorComponent implements OnInit{
       {
         callbacks: {
           onInit: function() {
+          var existingTemplate=false;
         //    $('#summernote').summernote('code', '<div id="op-firstname">Firstname</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">LastName</i></b></div>');
         $('#summernote').summernote('code', '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>');
         $('#summernote').summernote('codeview.activate');
@@ -45,8 +46,7 @@ export class SummernoteEditorComponent implements OnInit{
           // let last =SourceCode.find('#op-lastname');
 
           // $('#firstname').val(first.text());
-          //  $('#lastname').val(last.text());       
-          
+          //  $('#lastname').val(last.text());          
      
           },
 
@@ -54,7 +54,7 @@ export class SummernoteEditorComponent implements OnInit{
         
       height: 350,
        width:800,
-   //    disable:true
+      disable:true
       },
 
            $('#firstname, #lastname').on('input',()=>{
