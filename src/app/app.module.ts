@@ -10,6 +10,7 @@ import { PreviewComponent } from './preview/preview.component';
 import { BothComponent } from './both/both.component';
 import { SummernoteEditorComponent } from './summernote-editor/summernote-editor.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,12 +18,13 @@ import { SummernoteEditorComponent } from './summernote-editor/summernote-editor
     SummernoteComponent,
     PreviewComponent,
     BothComponent,
-    SummernoteEditorComponent,
+    SummernoteEditorComponent
   ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     QuillModule.forRoot()
   ],

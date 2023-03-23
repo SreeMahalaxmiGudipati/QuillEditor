@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../model/user.model';
 import { UserService } from '../user.service';
 declare var $: any;
@@ -11,25 +11,26 @@ declare var $: any;
 })
 export class SummernoteEditorComponent implements OnInit{
 
+
+  nameForm!: FormGroup;
+
+
   editorContent!: string;
   previewContent!:string;
   SourcecodeInEditor!:string;
 
-  constructor(public userService:UserService){
+  constructor(public userService:UserService,private formBuilder: FormBuilder){
 
   }
 
-  user = new User();
-
-   save(){
-    console.log(this.user.firstname);
-    console.log(this.user.lastname);
-    this.userService.fn=this.user.firstname;
-    this.userService.ln=this.user.lastname;
-   }
 
   ngOnInit(): void {
 
+    this.nameForm = this.formBuilder.group({
+      firstName: [''],
+      lastName: ['']
+    });
+    
     $('#summernote').summernote(
       {
         callbacks: {
@@ -90,7 +91,7 @@ export class SummernoteEditorComponent implements OnInit{
   ChangeContentInSummernote() {
   let fn = $('#firstname').val();
     let ln = $('#lastname').val();
-    let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i>${ ln }</i></b></div>`;
+    let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">${ ln }</i></b></div>`;
     $('#summernote').summernote('code',template);
   }
 

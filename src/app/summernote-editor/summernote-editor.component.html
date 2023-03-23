@@ -7,29 +7,41 @@
 <button (click)="copyContentwithSourceCode()" class="btn btn-primary">Copy with Sourcecode</button>
 <br><br>
 
-<form >
+
+<form [formGroup]="nameForm" (ngSubmit)="ChangeContentInSummernote()">
+        <div>
+          <label for="firstname">First Name:</label>
+          <input type="text" id="firstname" formControlName="firstname">
+        </div>
+        <div>
+          <label for="lastname">Last Name:</label>
+          <input type="text" id="lastname" formControlName="lastname">
+        </div><br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+<!-- <form >
     <table>
         <tr>
             <td>FirstName :</td>
             <td>
-                <input type="text" name="firstname" id="firstname" [(ngModel)]="user.firstname">
+                <input type="text" name="firstname" id="firstname" >
             </td>
         </tr>
         <tr>
           <td>LastName :</td>
           <td>
-              <input type="text"  name="lastname" id="lastname" [(ngModel)]="user.lastname" >
+              <input type="text"  name="lastname" id="lastname">
           </td>
       </tr>
         <tr>
             <td>&nbsp;</td>
             <td>
-                <!-- <button type="submit" value="SAVE" class="btn btn-primary" (click)="save()">SAVE</button> -->
+               
                 <button type="submit" value="SAVE" class="btn btn-primary" (click)="ChangeContentInSummernote()">SAVE</button>
                 <br><br>
             </td>
         </tr>
     </table>
-    </form>
-
-    
+    </form> -->
