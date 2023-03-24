@@ -55,7 +55,6 @@ export class FormGenerateComponent implements OnInit{
 
   onValueChange(index: number, value: string,fieldIndex: number) {
     console.log(`Value ${index + 1} changed to ${value}`);
-  //  console.log(`Value ${index + 1} changed to ${value} for field ${fieldIndex} and tag ${tagIndex}`);
     let pattern = /{{\s*(\w+)\s*}}/g;
     let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
 
@@ -78,10 +77,6 @@ export class FormGenerateComponent implements OnInit{
     }
 
 
- 
-
-   
-
     $('#summernote').summernote('code', template);
   }
   
@@ -103,7 +98,6 @@ export class FormGenerateComponent implements OnInit{
   }
 
   get valueControls() {
- //   console.log((this.form.get('values') as FormArray).controls);
     return (this.form.get('values') as FormArray).controls;
   }
   
