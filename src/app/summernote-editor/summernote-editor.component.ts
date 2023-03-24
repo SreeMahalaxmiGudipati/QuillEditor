@@ -58,15 +58,15 @@ export class SummernoteEditorComponent implements OnInit{
        width:800
       },
 
-           $('#firstname, #lastname').on('input',()=>{
+     $('#firstname, #lastname').on('input',()=>{
 
             var pattern = /{{\s*(\w+)\s*}}/g;
 
-       let template='<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
-            var matches = template.match(pattern);
-            console.log(matches);
-            if (matches) {
-              matches.forEach((match) => {
+          let template='<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
+            var found = template.match(pattern);
+            console.log(found);
+            if (found) {
+              found.forEach((match) => {
                 var variable = match.replace('{{', '').replace('}}', '').trim();
                 // console.log(variable);
                 // console.log(match);
