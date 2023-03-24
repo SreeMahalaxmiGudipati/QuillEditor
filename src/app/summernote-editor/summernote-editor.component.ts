@@ -34,7 +34,7 @@ export class SummernoteEditorComponent implements OnInit{
         callbacks: {
           onInit: function() {
         $('#summernote').summernote('code', template);
-        $('#summernote').summernote('disable');
+     //   $('#summernote').summernote('disable');
     //    $('#summernote').summernote('codeview.activate');
           },
           onChange: (content: string, $editable: any) => {
@@ -60,7 +60,7 @@ export class SummernoteEditorComponent implements OnInit{
 
      $('#firstname, #lastname').on('input',()=>{
 
-            var pattern = /{{\s*(\w+)\s*}}/g;
+        var pattern = /{{\s*(\w+)\s*}}/g;
 
           let template='<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
             var found = template.match(pattern);
@@ -91,7 +91,7 @@ export class SummernoteEditorComponent implements OnInit{
           
             $('#summernote').summernote('code', template);
           }),
-     
+      
 
     //   $('#firstname').on('input',()=>{
     //   let fn = $('#firstname').val();
