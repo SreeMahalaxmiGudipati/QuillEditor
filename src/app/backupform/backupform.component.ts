@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 declare var $: any;
 
@@ -7,7 +7,7 @@ declare var $: any;
   templateUrl: './backupform.component.html',
   styleUrls: ['./backupform.component.css']
 })
-export class BackupformComponent {
+export class BackupformComponent implements OnInit{
   nameForm!: FormGroup;
   form!: FormGroup;
   values!: FormArray<FormControl>;
@@ -36,11 +36,11 @@ export class BackupformComponent {
         $('#summernote').summernote('disable');
     //    $('#summernote').summernote('codeview.activate');
           },
-          onChange: (content: string, $editable: any) => {
-           $('#preview').html(content);
-           this.previewContent = $('#preview').val(content);
-          const storageString = JSON.stringify(this.previewContent);
-          localStorage.setItem('Preview Content', storageString);  
+        //  onChange: (content: string, $editable: any) => {
+          //  $('#preview').html(content);
+          //  this.previewContent = $('#preview').val(content);
+          // const storageString = JSON.stringify(this.previewContent);
+          // localStorage.setItem('Preview Content', storageString);  
 
           // let SourceCode = $('<div>').html(content);
           //  let first =SourceCode.find("#op-firstname");
@@ -49,7 +49,7 @@ export class BackupformComponent {
           // $('#firstname').val(first.text());
           //  $('#lastname').val(last.text());          
      
-          },
+     //     },
 
         },
         
@@ -151,25 +151,23 @@ export class BackupformComponent {
     }
   
     $('#summernote').summernote('code', template);
-    (content: string, $editable: any) => {
-      $('#preview').html(content);
-      this.previewContent = $('#preview').val(content);
-     const storageString = JSON.stringify(this.previewContent);
-     console.log(storageString);
-     localStorage.setItem('Preview Content', storageString);  
+    $('#preview').html(template);
+    this.previewContent = $('#preview').val(template);
+   const storageString = JSON.stringify(this.previewContent);
+   localStorage.setItem('Preview Content', storageString);          
+
+  let value1 = localStorage.getItem('Preview Content');
+  //  console.log(value1);
+   let str = value1;
+   str = String(str);
+   var obj=JSON.parse(str);
+   console.log(obj); 
+   console.log(obj[0].value);
+
+    if(value1){
+      template=template.replace('{{ firstname1 }}',"hello");
+     $('#previewprevious').html(obj[0].value);
     }
-    let value1 = localStorage.getItem('Preview Content');
-    console.log("Value1");
-     console.log(value1);
-     let str = value1;
-     str = String(str);
-     var obj=JSON.parse(str);
-   //  console.log(obj); 
-  //   console.log(obj[0].value);
-  
-      if(value1){
-       $('#previewprevious').html(obj[0].value);
-      }
   
   }
   
