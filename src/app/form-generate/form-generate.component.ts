@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from '../model/user.model';
 import { UserService } from '../user.service';
 declare var $: any;
 

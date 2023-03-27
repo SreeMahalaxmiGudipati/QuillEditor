@@ -10,6 +10,7 @@ import { PreviewComponent } from './preview/preview.component';
 import { BothComponent } from './both/both.component';
 import { SummernoteEditorComponent } from './summernote-editor/summernote-editor.component';
 import { FormGenerateComponent } from './form-generate/form-generate.component';
+import { BackupformComponent } from './backupform/backupform.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { FormGenerateComponent } from './form-generate/form-generate.component';
     PreviewComponent,
     BothComponent,
     SummernoteEditorComponent,
-    FormGenerateComponent
+    FormGenerateComponent,
+    BackupformComponent
   ],
   imports: [
     FormsModule,
