@@ -24,7 +24,7 @@ export class FormGenerateComponent implements OnInit{
   ngOnInit(): void {
 
     this.initializeForm();
-    this.logIds();
+   // this.logIds();
     
     let template='<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
 
@@ -50,11 +50,10 @@ export class FormGenerateComponent implements OnInit{
       
       );
      
-   
   }
 
-  onValueChange(index: number, value: string,fieldIndex: number) {
-    console.log(`Value ${index + 1} changed to ${value}`);
+  onValueChange(index: number, value: string, fieldIndex: number) {
+
     let pattern = /{{\s*(\w+)\s*}}/g;
     let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
 
@@ -66,16 +65,41 @@ export class FormGenerateComponent implements OnInit{
         let variable = match.replace('{{', '').replace('}}', '').trim();
    //     console.log(variable);
 
-        if (variable === this.fieldNames[fieldIndex] + '1'  && index === fieldIndex) {
+        // if (variable === this.fieldNames[index] + '1'  && index === fieldIndex) {
+        //   console.log(fieldIndex);
+        //   template = template.replace(match, value);
+        //   console.log(value);
+        // }
+
+        // if (variable === 'firstname1' && index === fieldIndex) {
+        //   console.log(fieldIndex);
+        //   template = template.replace(match, value);
+        //   console.log(value);
+        // }
+
+        // if (variable === 'lastname1' && index === fieldIndex) {
+        //   console.log(fieldIndex);
+        //   template = template.replace(match, value);
+        //   console.log(value);
+        // }
+
+        if (variable === 'firstname1' && index==0) {
+          
           console.log(fieldIndex);
+          console.log(match);
           template = template.replace(match, value);
           console.log(value);
         }
-  
+
+        if (variable === 'lastname1' && index==1) {
+          console.log(fieldIndex);
+          console.log(match);
+          template = template.replace(match, value);
+          console.log(value);
+        }
 
       });
     }
-
 
     $('#summernote').summernote('code', template);
   }
@@ -101,12 +125,7 @@ export class FormGenerateComponent implements OnInit{
     return (this.form.get('values') as FormArray).controls;
   }
   
-  logIds() {
-    const firstname = document.getElementById('firstname');
-    const lastname = document.getElementById('lastname');
-    console.log(`First name input field id: ${firstname ? firstname.id : 'Not found'}`);
-    console.log(`Last name input field id: ${lastname ? lastname.id : 'Not found'}`);
-  }
+ 
 
   ChangeContentInSummernote() {
   let fn = $('#firstname').val();
