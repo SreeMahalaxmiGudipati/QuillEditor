@@ -17,7 +17,7 @@ export class FormGenerateComponent implements OnInit{
   editorContent!: string;
   previewContent!:string;
   SourcecodeInEditor!:string;
-  fieldNames: string[] = ['firstname', 'lastname'];
+  fieldNames: string[] = ['firstname', 'lastname','name'];
 
   constructor(private fb: FormBuilder) {}
 
@@ -52,63 +52,93 @@ export class FormGenerateComponent implements OnInit{
      
   }
 
-  onValueChange(index: number, value: string, fieldIndex: number) {
+  // onValueChange(index: number, value: string, fieldIndex: number) {
 
-    let pattern = /{{\s*(\w+)\s*}}/g;
-    let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
+  //   let pattern = /{{\s*(\w+)\s*}}/g;
+  //   let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
 
-    let matches = template.match(pattern);
-    console.log(matches);
-    if (matches) {
-      matches.forEach((match) => {
+  //   let matches = template.match(pattern);
+  //   console.log(matches);
+  //   if (matches) {
+  //     matches.forEach((match) => {
 
-        let variable = match.replace('{{', '').replace('}}', '').trim();
-   //     console.log(variable);
+  //       let variable = match.replace('{{', '').replace('}}', '').trim();
+  //       console.log(variable);
 
-        // if (variable === this.fieldNames[index] + '1'  && index === fieldIndex) {
-        //   console.log(fieldIndex);
-        //   template = template.replace(match, value);
-        //   console.log(value);
-        // }
+  //       if (variable === this.fieldNames[index] + '1'  && index === fieldIndex) {
+  //         console.log(fieldIndex);
+  //         template = template.replace(match, value);
+  //         console.log(value);
+  //       }
 
-        // if (variable === 'firstname1' && index === fieldIndex) {
-        //   console.log(fieldIndex);
-        //   template = template.replace(match, value);
-        //   console.log(value);
-        // }
+  //       // if (variable === 'firstname1' && index === fieldIndex) {
+  //       //   console.log(fieldIndex);
+  //       //   template = template.replace(match, value);
+  //       //   console.log(value);
+  //       // }
 
-        // if (variable === 'lastname1' && index === fieldIndex) {
-        //   console.log(fieldIndex);
-        //   template = template.replace(match, value);
-        //   console.log(value);
-        // }
+  //       // if (variable === 'lastname1' && index === fieldIndex) {
+  //       //   console.log(fieldIndex);
+  //       //   template = template.replace(match, value);
+  //       //   console.log(value);
+  //       // }
 
-        if (variable === 'firstname1' && index==0) {
+  //     //   if (variable === 'firstname1' && index==0) {
           
-          console.log(fieldIndex);
-          console.log(match);
-          template = template.replace(match, value);
-          console.log(value);
-        }
+  //     //     console.log(fieldIndex);
+  //     // //    console.log(match);
+  //     //     template = template.replace(match, value);
+  //     //     console.log(value);
+  //     //     $('#summernote').summernote('code', template);
+  //     //   }
 
-        if (variable === 'lastname1' && index==1) {
-          console.log(fieldIndex);
-          console.log(match);
-          template = template.replace(match, value);
-          console.log(value);
-        }
+  //     //   if (variable === 'lastname1' && index==1) {
+  //     //     console.log(fieldIndex);
+  //     //    // console.log(match);
+  //     //     template = template.replace(match, value);
+  //     //     console.log(value);
+  //     //     $('#summernote').summernote('code', template);
+  //     //   }
 
+  //     });
+  //   }
+
+  //   $('#summernote').summernote('code', template);
+  // }
+
+  onValueChange(index: number, value: string, fieldIndex: number) {
+    const pattern = /{{\s*(\w+)\s*}}/g;
+    let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
+  
+    const matches = template.match(pattern);
+    console.log(matches);
+  
+    if (matches) {
+
+      matches.forEach((match) => {
+        const variable = match.replace('{{', '').replace('}}', '').trim();
+        console.log(variable);
+        
+        if (variable === this.fieldNames[index] + '1' && index === fieldIndex) {
+          template = template.replace(match, value);
+        } 
+        else {
+          const controlIndex = this.fieldNames.findIndex(name => name + '1' === variable);
+          console.log(controlIndex);
+          const controlValue = this.valueControls[controlIndex].value;
+          console.log(controlValue);
+          template = template.replace(match, controlValue);
+        }
       });
     }
-
+  
     $('#summernote').summernote('code', template);
   }
   
- 
-
+  
   initializeForm() {
   
-    let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
+    let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
     const interpolationTagsCount = (template.match(/\{\{[^{}]+\}\}/g) || []).length;
     this.values = new FormArray<FormControl>([]);
     for (let i = 0; i < interpolationTagsCount; i++) {
@@ -117,8 +147,9 @@ export class FormGenerateComponent implements OnInit{
     }
     this.form = new FormGroup({
       values: this.values
+     
     });
-  
+    // console.log(this.values);
   }
 
   get valueControls() {

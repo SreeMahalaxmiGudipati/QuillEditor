@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../model/user.model';
 import { UserService } from '../user.service';
 declare var $: any;
@@ -12,6 +12,10 @@ declare var $: any;
 export class SummernoteEditorComponent implements OnInit{
 
   nameForm!: FormGroup;
+  form!: FormGroup;
+  values!: FormArray<FormControl>;
+
+  fieldNames: string[] = ['firstname', 'lastname','name'];
 
   editorContent!: string;
   previewContent!:string;
@@ -21,12 +25,15 @@ export class SummernoteEditorComponent implements OnInit{
 
   ngOnInit(): void {
 
+
+    this.initializeForm();
+
     this.nameForm = this.formBuilder.group({
       firstName: [''],
       lastName: ['']
     });
     
-    let template='<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
+    let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
   //  let template='<div id="op-firstname">Firstname</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">LastName</i></b></div>';
 
     $('#summernote').summernote(
@@ -58,39 +65,39 @@ export class SummernoteEditorComponent implements OnInit{
        width:800
       },
 
-     $('#firstname, #lastname').on('input',()=>{
+    //  $('#firstname, #lastname').on('input',()=>{
 
-        var pattern = /{{\s*(\w+)\s*}}/g;
+    //     var pattern = /{{\s*(\w+)\s*}}/g;
 
-          let template='<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
-            var found = template.match(pattern);
-            console.log(found);
-            if (found) {
-              found.forEach((match) => {
-                var variable = match.replace('{{', '').replace('}}', '').trim();
-                // console.log(variable);
-                // console.log(match);
+    //       let template='<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
+    //         var found = template.match(pattern);
+    //         console.log(found);
+    //         if (found) {
+    //           found.forEach((match) => {
+    //             var variable = match.replace('{{', '').replace('}}', '').trim();
+    //             // console.log(variable);
+    //             // console.log(match);
 
-                if (variable === 'firstname1') {
+    //             if (variable === 'firstname1') {
                   
-                 let fn = $('#firstname').val();
-                 console.log(fn);
+    //              let fn = $('#firstname').val();
+    //              console.log(fn);
                   
-                 template = template.replace(match, fn);
+    //              template = template.replace(match, fn);
 
-              }
-              if (variable === 'lastname1') {
+    //           }
+    //           if (variable === 'lastname1') {
                   
-                let ln = $('#lastname').val();
-                console.log(ln);
+    //             let ln = $('#lastname').val();
+    //             console.log(ln);
                  
-                template = template.replace(match, ln);
-             }
-              })
-            }
+    //             template = template.replace(match, ln);
+    //          }
+    //           })
+    //         }
           
-            $('#summernote').summernote('code', template);
-          }),
+    //         $('#summernote').summernote('code', template);
+    //       }),
       
 
     //   $('#firstname').on('input',()=>{
@@ -122,6 +129,61 @@ export class SummernoteEditorComponent implements OnInit{
     }
    
   }
+
+  onValueChange(index: number, value: string, fieldIndex: number) {
+    const pattern = /{{\s*(\w+)\s*}}/g;
+    let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
+  
+    const matches = template.match(pattern);
+    console.log(matches);
+  
+    if (matches) {
+
+      matches.forEach((match) => {
+        const variable = match.replace('{{', '').replace('}}', '').trim();
+        console.log(variable);
+        
+        if (variable === this.fieldNames[index] + '1' && index === fieldIndex) {
+          template = template.replace(match, value);
+          $('#summernote').summernote('code', template);
+        } 
+
+        else {
+          const controlIndex = this.fieldNames.findIndex(name => name + '1' === variable);
+       //   console.log(controlIndex);
+          const controlValue = this.valueControls[controlIndex].value;
+          template = template.replace(match, controlValue);
+          $('#summernote').summernote('code', template);
+        }
+      });
+    }
+  
+    $('#summernote').summernote('code', template);
+    
+  }
+  
+  
+  
+  initializeForm() {
+  
+    let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
+    const interpolationTagsCount = (template.match(/\{\{[^{}]+\}\}/g) || []).length;
+    this.values = new FormArray<FormControl>([]);
+    for (let i = 0; i < interpolationTagsCount; i++) {
+      this.values.push(new FormControl(''));
+      
+    }
+    this.form = new FormGroup({
+      values: this.values
+     
+    });
+    // console.log(this.values);
+  }
+
+  get valueControls() {
+    return (this.form.get('values') as FormArray).controls;
+  }
+  
 
   ChangeContentInSummernote() {
   let fn = $('#firstname').val();
