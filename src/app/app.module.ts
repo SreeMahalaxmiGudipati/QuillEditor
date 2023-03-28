@@ -11,6 +11,11 @@ import { BothComponent } from './both/both.component';
 import { SummernoteEditorComponent } from './summernote-editor/summernote-editor.component';
 import { FormGenerateComponent } from './form-generate/form-generate.component';
 import { BackupformComponent } from './backupform/backupform.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
+import { UserService } from './user.service';
+import { HttpClientModule } from '@angular/common/http';
+import { Register1Component } from './register1/register1.component';
 
 
 @NgModule({
@@ -22,17 +27,20 @@ import { BackupformComponent } from './backupform/backupform.component';
     BothComponent,
     SummernoteEditorComponent,
     FormGenerateComponent,
-    BackupformComponent
+    BackupformComponent,
+    LoginComponent,
+    Register1Component
   ],
   imports: [
+    BrowserModule,
+    HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
     QuillModule.forRoot()
   ],
-  providers: [],
+  providers: [UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

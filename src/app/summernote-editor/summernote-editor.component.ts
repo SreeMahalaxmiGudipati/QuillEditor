@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from '../auth.service';
 declare var $: any;
 
 @Component({
@@ -19,68 +20,48 @@ export class SummernoteEditorComponent implements OnInit {
   previewContent!:string;
   SourcecodeInEditor!:string;
 
-  constructor() {
+  constructor(private authservice:AuthService) {
 
   }
 
   ngOnInit(): void {
 
     this.initializeForm();
+    this.authservice.isUserloggedAuthService=true;
     
     let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
   //  let template='<div id="op-firstname">Firstname</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">LastName</i></b></div>';
 
-    $('#summernote').summernote(
-      {
-        callbacks: {
-          onInit: function() {
-        $('#summernote').summernote('code', template);
-        $('#summernote').summernote('disable');
-    //    $('#summernote').summernote('codeview.activate');
-          },
-          // onChange: (content: string, $editable: any) => {
-          //  $('#preview').html(content);
-          //  this.previewContent = $('#preview').val(content);
-          // const storageString = JSON.stringify(this.previewContent);
-          // localStorage.setItem('Preview Content', storageString);          
-          
-          // },
 
+  $('#summernote').summernote(
+    {
+      callbacks: {
+        onInit: function() {
+      $('#summernote').summernote('code', template);
+      $('#summernote').summernote('disable');
         },
-        
-      height: 350,
-       width:800
+  
+
       },
       
-      );
+    height: 350,
+     width:800
+    },
+    );
 
-       let value1 = localStorage.getItem('Preview Content');
-      //  console.log(value1);
-       let str = value1;
-       str = String(str);
-       var obj=JSON.parse(str);
-       console.log(obj); 
-       console.log(obj[0].value);
-    
-        if(value1){
-        //  template=template.replace('{{ firstname1 }}',"hello");
-         $('#previewprevious').html(obj[0].value);
-        }
-        // this.form.patchValue({
-        //   firstname1: '{{ firstname1 }}',
-        //   lastname1: '{{ lastname1 }}',
-        //   name1: '{{ name1 }}'
-        // });
+     let value1 = localStorage.getItem('Preview Content');
+    //  console.log(value1);
+     let str = value1;
+     str = String(str);
+     var obj=JSON.parse(str);
+     console.log(obj); 
+     console.log(obj[0].value);
+  
+      if(value1){
+      //  template=template.replace('{{ firstname1 }}',"hello");
+       $('#previewprevious').html(obj[0].value);
+      }
         
-        //  if(value1){
-        //    if (this.form) {
-        //      template = template.replace('{{ firstname1 }}', this.form.get('firstname1')?.value || '')
-        //        .replace('{{ lastname1 }}', this.form.get('lastname1')?.value || '')
-        //        .replace('{{ name1 }}', this.form.get('name1')?.value || '');
-        //    }
-                           
-        //    $('#previewprevious').html(value1);
-        //  } 
      
    
   }
@@ -134,23 +115,17 @@ export class SummernoteEditorComponent implements OnInit {
   }
   
   
-  
   initializeForm() {
-  
     let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
-    const interpolationTagsCount = (template.match(/\{\{[^{}]+\}\}/g) || []).length;
+   const interpolationTagsCount = (template.match(/\{\{[^{}]+\}\}/g) || []).length;
     this.values = new FormArray<FormControl>([]);
     for (let i = 0; i < interpolationTagsCount; i++) {
       this.values.push(new FormControl(''));
-      
     }
     this.form = new FormGroup({
       values: this.values
-     
     });
-    // console.log(this.values);
   }
-
   get valueControls() {
     return (this.form.get('values') as FormArray).controls;
   }
@@ -162,7 +137,6 @@ export class SummernoteEditorComponent implements OnInit {
     let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">${ ln }</i></b></div>`;
     $('#summernote').summernote('code',template);
   }
-
   copyContent(){
     const previewContent: string = $('#preview').text();
     const tempTextArea = $('<textarea></textarea>');
@@ -171,11 +145,8 @@ export class SummernoteEditorComponent implements OnInit {
     tempTextArea.select();
     document.execCommand('copy');
     tempTextArea.remove();
-    
   }
-
   copyContentwithSourceCode(){
-
     const previewContent: string = $('#preview').html();
     const tempTextArea = $('<textarea></textarea>');
     tempTextArea.val(previewContent).css('opacity', '0');
@@ -183,6 +154,5 @@ export class SummernoteEditorComponent implements OnInit {
     tempTextArea.select();
     document.execCommand('copy');
     tempTextArea.remove();
-   
   }
 }

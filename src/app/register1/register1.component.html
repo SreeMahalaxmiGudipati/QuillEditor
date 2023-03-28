@@ -1,0 +1,39 @@
+<div class="login-container">
+    <h2>Register</h2>
+    <form>
+        <table>
+            <tr>
+                <td>UserName</td>
+                <td>
+                    <input type="text"  name="user" [(ngModel)]="Username">
+                  
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>
+                    <input type="password" name="pass" [(ngModel)]="Password">
+                 
+                </td>
+            </tr>
+            <tr>
+                <td>Confirm Password</td>
+                <td>
+                    <input type="confirmpassword" name="pass" [(ngModel)]="ConfirmPassword">
+                 
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <br>
+                    <button type="submit" value="SAVE" class="btn btn-primary" (click)="register()">Register</button>
+                    <br />
+                    <br>
+                    <a routerLink="login">Login</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+  
+    </div>
