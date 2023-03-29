@@ -10,6 +10,7 @@ import { UserService } from './user.service';
 export class AppComponent {
   title = 'QuillEditor';
   Username:any;
+  imageUrl = 'https://static.businessworld.in/article/article_extra_large_image/1626851488_AyxrRq_thumbnail_Outplay_sales_engagement_platform_1_95_.png';
 
   constructor(private userservice:UserService,private http:HttpClient){}
 

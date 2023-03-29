@@ -11,16 +11,15 @@ declare var $: any;
 export class SummernoteEditorComponent implements OnInit {
   content!: string;
 
- // @ViewChild('summernote') summernote: any;
   form!: FormGroup;
   values!: FormArray<FormControl>;
 
-  fieldNames: string[] = ['firstname', 'lastname','name'];
-  Names:string[] =['Firstname','Lastname','Name'];
+  Names:string[] =['Firstname','Lastname','Role','Contact No','Twitter','Facebook','ImageURL'];
   variablenames :string[] =[];
   editorContent!: string;
   previewContent!:string;
   SourcecodeInEditor!:string;
+  imageUrl = 'https://static.businessworld.in/article/article_extra_large_image/1626851488_AyxrRq_thumbnail_Outplay_sales_engagement_platform_1_95_.png';
 
   constructor(private authservice:AuthService) {
 
@@ -31,50 +30,53 @@ export class SummernoteEditorComponent implements OnInit {
     this.initializeForm();
     this.authservice.isUserloggedAuthService=true;
     
-    let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
-  //  let template='<div id="op-firstname">Firstname</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">LastName</i></b></div>';
+  //  let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
 
-
+  let template=`
+  <div style="font-size:20px;"><b>{{ firstname }}</b> <b>{{ lastname }}</b></div><div>{{ role }}</div>
+  <div><h6>Mob: {{ MobileNumber }} </h6> </div><div><i class="fab fa-twitter"></i> {{ TwitterLink }}</div>
+  <div><i class="fab fa-facebook"></i> {{ FacebookLink }}</div><img src="{{ imageUrl }}" alt="User Image" height=100px>`
   $('#summernote').summernote(
-    {
-      callbacks: {
-        onInit: function() {
-      $('#summernote').summernote('code', template);
-      var code=$('#summernote').summernote('code');
-      console.log("Code",code);
-      var codeView = $('#summernote').summernote('codeview.get');
-    console.log("Codee",codeView);
-   //   $('#summernote').summernote('disable');
-   $('#summernote').summernote('codeview.activate');
+      {
+        callbacks: {
+          onInit: function() {
+        $('#summernote').summernote('code', template);
+        // $('#summernote').summernote('disable');
+          },
+          onChange: (content: string, $editable: any) => {
+           $('#preview').html(content);
+           this.previewContent = $('#preview').val(content);
+          const storageString = JSON.stringify(this.previewContent);
+          localStorage.setItem('Preview Content', storageString);
+          },
         },
-  
+      height: 350,
+       width:800
       },
-      
-    height: 350,
-     width:800
-    },
-    );
+      );
+      let value1 = localStorage.getItem('Preview Content');
+      //  console.log(value1);
+       let str = value1;
+       str = String(str);
+       var obj=JSON.parse(str);
+       console.log(obj);
+       console.log(obj[0].value);
+        if(value1)
+        {
+         $('#previewprevious').html(obj[0].value);
+        }
 
-     let value1 = localStorage.getItem('Preview Content');
-    //  console.log(value1);
-     let str = value1;
-     str = String(str);
-     var obj=JSON.parse(str);
-     console.log(obj); 
-     console.log(obj[0].value);
-  
-      if(value1){
-      //  template=template.replace('{{ firstname1 }}',"hello");
-       $('#previewprevious').html(obj[0].value);
-      }
-        
-     
-   
   }
+
+
   onValueChange(index: number, value: string, fieldIndex: number) {
     const pattern = /{{\s*(\w+)\s*}}/g;
-    let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
-  
+
+  //  let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
+  let template=`
+  <div style="font-size:20px;"><b>{{ firstname }}</b> <b>{{ lastname }}</b></div><div>{{ role }}</div>
+  <div><h6>Mob: {{ MobileNumber }} </h6> </div><div><i class="fab fa-twitter"></i> {{ TwitterLink }}</div>
+  <div><i class="fab fa-facebook"></i> {{ FacebookLink }}</div><img src="{{ imageUrl }}" alt="User Image" height=100px>`
     const matches = template.match(pattern);
     console.log(matches);
   
@@ -103,89 +105,18 @@ export class SummernoteEditorComponent implements OnInit {
     }
   
     $('#summernote').summernote('code', template);
-    $('#preview').html(template);
-    this.previewContent = $('#preview').val(template);
-   const storageString = JSON.stringify(this.previewContent);
-   localStorage.setItem('Preview Content', storageString);          
-
-  let value1 = localStorage.getItem('Preview Content');
-  //  console.log(value1);
-   let str = value1;
-   str = String(str);
-   var obj=JSON.parse(str);
-   console.log(obj); 
-   console.log(obj[0].value);
-
-    if(value1){
-      template=template.replace('{{ firstname1 }}',"hello");
-     $('#previewprevious').html(obj[0].value);
-    }
+ 
   
   }
   
-
-  // onValueChange(index: number, value: string, fieldIndex: number) {
-  //   const pattern = /{{\s*(\w+)\s*}}/g;
-  //   let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
-  
-  //   const matches = template.match(pattern);
-  //   console.log(matches);
-  
-  //   if (matches) {
-
-  //     matches.forEach((match) => {
-  //       const variable = match.replace('{{', '').replace('}}', '').trim();
-
-  //       console.log(variable);
-  //        this.variablenames.push(variable);
-       
-  //       console.log("variablenames",this.variablenames);
-        
-  //       if (variable === this.variablenames[index]  && index === fieldIndex) {
-  //         template = template.replace(match, value);
-  //         $('#summernote').summernote('code', template);
-  //       } 
-
-  //       else {
-  //         const controlIndex = this.variablenames.findIndex(name => name === variable);
-  //      //   console.log(controlIndex);
-  //         const controlValue = this.valueControls[controlIndex].value;
-  //         template = template.replace(match, controlValue);
-  //         $('#summernote').summernote('code', template);
-  //       }
-  //     });
-  //   }
-  
-  //   $('#summernote').summernote('code', template);
-  //   var codeView = $('#summernote').summernote('codeview.getCode()');
-  //   console.log("Codee",codeView);
-  //   var code=$('#summernote').summernote('code');
-  //     console.log("Code",code);
-  //   onChange: (content: string, $editable: any) => {
-  //   $('#preview').html(content);
-  //     this.previewContent = $('#preview').val(content);
-  //    const storageString = JSON.stringify(this.previewContent);
-  //    localStorage.setItem('Preview Content', storageString);          
-
-  //   let value1 = localStorage.getItem('Preview Content');
-  //   //  console.log(value1);
-  //    let str = value1;
-  //    str = String(str);
-  //    var obj=JSON.parse(str);
-  //    console.log(obj); 
-  //    console.log(obj[0].value);
-  
-  //     if(value1){
-  //     //  template=template.replace('{{ firstname1 }}',"hello");
-  //      $('#previewprevious').val(obj[0].value);
-  //     }
-  //   }
-  // }
-  
-  
   initializeForm() {
-    let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
-   const interpolationTagsCount = (template.match(/\{\{[^{}]+\}\}/g) || []).length;
+  //  let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
+  let template=`
+  <div style="font-size:20px;"><b>{{ firstname }}</b> <b>{{ lastname }}</b></div><div>{{ role }}</div>
+  <div><h6>Mob: {{ MobileNumber }} </h6> </div><div><i class="fab fa-twitter"></i> {{ TwitterLink }}</div>
+  <div><i class="fab fa-facebook"></i> {{ FacebookLink }}</div><img src="{{ imageUrl }}" alt="User Image" height=100px>`
+
+  const interpolationTagsCount = (template.match(/\{\{[^{}]+\}\}/g) || []).length;
     this.values = new FormArray<FormControl>([]);
     for (let i = 0; i < interpolationTagsCount; i++) {
       this.values.push(new FormControl(''));
@@ -197,14 +128,7 @@ export class SummernoteEditorComponent implements OnInit {
   get valueControls() {
     return (this.form.get('values') as FormArray).controls;
   }
-  
 
-  ChangeContentInSummernote() {
-  let fn = $('#firstname').val();
-    let ln = $('#lastname').val();
-    let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">${ ln }</i></b></div>`;
-    $('#summernote').summernote('code',template);
-  }
   copyContent(){
     const previewContent: string = $('#preview').text();
     const tempTextArea = $('<textarea></textarea>');
@@ -214,6 +138,7 @@ export class SummernoteEditorComponent implements OnInit {
     document.execCommand('copy');
     tempTextArea.remove();
   }
+
   copyContentwithSourceCode(){
     const previewContent: string = $('#preview').html();
     const tempTextArea = $('<textarea></textarea>');
