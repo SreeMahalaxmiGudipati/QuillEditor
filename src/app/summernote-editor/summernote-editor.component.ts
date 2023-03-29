@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth.service';
 declare var $: any;
@@ -9,13 +9,15 @@ declare var $: any;
   styleUrls: ['./summernote-editor.component.css']
 })
 export class SummernoteEditorComponent implements OnInit {
+  content!: string;
 
+ // @ViewChild('summernote') summernote: any;
   form!: FormGroup;
   values!: FormArray<FormControl>;
 
   fieldNames: string[] = ['firstname', 'lastname','name'];
-  Names:string[] =['Firstname','Lastname','Name']
-
+  Names:string[] =['Firstname','Lastname','Name'];
+  variablenames :string[] =[];
   editorContent!: string;
   previewContent!:string;
   SourcecodeInEditor!:string;
@@ -38,10 +40,14 @@ export class SummernoteEditorComponent implements OnInit {
       callbacks: {
         onInit: function() {
       $('#summernote').summernote('code', template);
-      $('#summernote').summernote('disable');
+      var code=$('#summernote').summernote('code');
+      console.log("Code",code);
+      var codeView = $('#summernote').summernote('codeview.get');
+    console.log("Codee",codeView);
+   //   $('#summernote').summernote('disable');
+   $('#summernote').summernote('codeview.activate');
         },
   
-
       },
       
     height: 350,
@@ -65,7 +71,6 @@ export class SummernoteEditorComponent implements OnInit {
      
    
   }
-
   onValueChange(index: number, value: string, fieldIndex: number) {
     const pattern = /{{\s*(\w+)\s*}}/g;
     let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
@@ -77,15 +82,18 @@ export class SummernoteEditorComponent implements OnInit {
 
       matches.forEach((match) => {
         const variable = match.replace('{{', '').replace('}}', '').trim();
-        console.log(variable);
+               console.log(variable);
+         this.variablenames.push(variable);
+       
+        console.log("variablenames",this.variablenames);
         
-        if (variable === this.fieldNames[index] + '1' && index === fieldIndex) {
+        if (variable === this.variablenames[index] && index === fieldIndex) {
           template = template.replace(match, value);
           $('#summernote').summernote('code', template);
         } 
 
         else {
-          const controlIndex = this.fieldNames.findIndex(name => name + '1' === variable);
+          const controlIndex = this.variablenames.findIndex(name => name === variable);
        //   console.log(controlIndex);
           const controlValue = this.valueControls[controlIndex].value;
           template = template.replace(match, controlValue);
@@ -96,23 +104,83 @@ export class SummernoteEditorComponent implements OnInit {
   
     $('#summernote').summernote('code', template);
     $('#preview').html(template);
-      this.previewContent = $('#preview').val(template);
-     const storageString = JSON.stringify(this.previewContent);
-     localStorage.setItem('Preview Content', storageString);          
+    this.previewContent = $('#preview').val(template);
+   const storageString = JSON.stringify(this.previewContent);
+   localStorage.setItem('Preview Content', storageString);          
 
-    let value1 = localStorage.getItem('Preview Content');
-    //  console.log(value1);
-     let str = value1;
-     str = String(str);
-     var obj=JSON.parse(str);
-     console.log(obj); 
-     console.log(obj[0].value);
+  let value1 = localStorage.getItem('Preview Content');
+  //  console.log(value1);
+   let str = value1;
+   str = String(str);
+   var obj=JSON.parse(str);
+   console.log(obj); 
+   console.log(obj[0].value);
+
+    if(value1){
+      template=template.replace('{{ firstname1 }}',"hello");
+     $('#previewprevious').html(obj[0].value);
+    }
   
-      if(value1){
-        template=template.replace('{{ firstname1 }}',"hello");
-       $('#previewprevious').html(obj[0].value);
-      }
   }
+  
+
+  // onValueChange(index: number, value: string, fieldIndex: number) {
+  //   const pattern = /{{\s*(\w+)\s*}}/g;
+  //   let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
+  
+  //   const matches = template.match(pattern);
+  //   console.log(matches);
+  
+  //   if (matches) {
+
+  //     matches.forEach((match) => {
+  //       const variable = match.replace('{{', '').replace('}}', '').trim();
+
+  //       console.log(variable);
+  //        this.variablenames.push(variable);
+       
+  //       console.log("variablenames",this.variablenames);
+        
+  //       if (variable === this.variablenames[index]  && index === fieldIndex) {
+  //         template = template.replace(match, value);
+  //         $('#summernote').summernote('code', template);
+  //       } 
+
+  //       else {
+  //         const controlIndex = this.variablenames.findIndex(name => name === variable);
+  //      //   console.log(controlIndex);
+  //         const controlValue = this.valueControls[controlIndex].value;
+  //         template = template.replace(match, controlValue);
+  //         $('#summernote').summernote('code', template);
+  //       }
+  //     });
+  //   }
+  
+  //   $('#summernote').summernote('code', template);
+  //   var codeView = $('#summernote').summernote('codeview.getCode()');
+  //   console.log("Codee",codeView);
+  //   var code=$('#summernote').summernote('code');
+  //     console.log("Code",code);
+  //   onChange: (content: string, $editable: any) => {
+  //   $('#preview').html(content);
+  //     this.previewContent = $('#preview').val(content);
+  //    const storageString = JSON.stringify(this.previewContent);
+  //    localStorage.setItem('Preview Content', storageString);          
+
+  //   let value1 = localStorage.getItem('Preview Content');
+  //   //  console.log(value1);
+  //    let str = value1;
+  //    str = String(str);
+  //    var obj=JSON.parse(str);
+  //    console.log(obj); 
+  //    console.log(obj[0].value);
+  
+  //     if(value1){
+  //     //  template=template.replace('{{ firstname1 }}',"hello");
+  //      $('#previewprevious').val(obj[0].value);
+  //     }
+  //   }
+  // }
   
   
   initializeForm() {

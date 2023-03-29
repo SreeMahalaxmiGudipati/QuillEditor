@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
+import { BackupformComponent } from './backupform/backupform.component';
 import { BothComponent } from './both/both.component';
 import { EditorComponent } from './editor/editor.component';
 import { FormGenerateComponent } from './form-generate/form-generate.component';
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path:'summernoteEditor',component:SummernoteEditorComponent},
   {path:'formgenerate',component:FormGenerateComponent},
   {path:'login',component:LoginComponent},
-  {path:'register',component:Register1Component}
+  {path:'register',component:Register1Component},
+  {path:'both1',component:BackupformComponent}
 ];
 
 @NgModule({
