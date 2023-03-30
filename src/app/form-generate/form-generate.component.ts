@@ -34,7 +34,7 @@ export class FormGenerateComponent {
   }
 
 
-  demo() {
+  EditorIntegrate() {
 
   const pattern = /{{\s*(\w+)\s*}}/g;
        
@@ -161,7 +161,7 @@ onValueChange(index: number, value: string, fieldIndex: number) {
     console.log(this.selectedtemplate.templates);
     console.log("Edit over");
     console.log(data);
-    this.demo();
+    this.EditorIntegrate();
   }
 
   getTemplateById(){
