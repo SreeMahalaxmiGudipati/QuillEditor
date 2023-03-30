@@ -1,0 +1,24 @@
+<div class="register-container">
+    <h1>ALL TEMPLATES</h1>
+</div>
+    <br>
+
+    <table class="table">
+        <thead>
+        <tr>
+                <th>ID</th>
+                <th>Template</th>
+                <th>SelectTemplate</th>
+        </tr>
+        </thead>
+        <tbody>
+                <tr *ngFor="let StudentItem of data">
+                    <td>{{StudentItem.id}}</td>
+                    <td [innerHTML]="StudentItem.templates"></td>
+                    <td>
+                        <button type="button" class="btn btn-success">Select</button>
+                    </td>
+                </tr>
+        </tbody>
+    
+    </table>

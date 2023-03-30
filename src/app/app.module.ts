@@ -16,6 +16,9 @@ import { AuthGuard } from './auth.guard';
 import { UserService } from './user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Register1Component } from './register1/register1.component';
+import { ModelserviceService } from './modelservice.service';
+import { AllTemplatesComponent } from './all-templates/all-templates.component';
+
 
 
 @NgModule({
@@ -29,7 +32,8 @@ import { Register1Component } from './register1/register1.component';
     FormGenerateComponent,
     BackupformComponent,
     LoginComponent,
-    Register1Component
+    Register1Component,
+    AllTemplatesComponent
   ],
   imports: [
     BrowserModule,
@@ -37,10 +41,11 @@ import { Register1Component } from './register1/register1.component';
     FormsModule,
     BrowserModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule,
     QuillModule.forRoot()
   ],
-  providers: [UserService, AuthGuard],
+  providers: [ModelserviceService,UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

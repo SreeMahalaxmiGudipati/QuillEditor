@@ -9,159 +9,164 @@ declare var $: any;
   styleUrls: ['./form-generate.component.css']
 })
 export class FormGenerateComponent implements OnInit{
-
+  content!: string;
   form!: FormGroup;
   values!: FormArray<FormControl>;
-  
   editorContent!: string;
   previewContent!:string;
   SourcecodeInEditor!:string;
-  fieldNames: string[] = ['firstname', 'lastname','name'];
+  fieldNames: string[] = [];
+  constructor() {}
 
-  constructor(private fb: FormBuilder) {}
+   //Dynamic labels
+   pattern = /{{\s*(\w+)\s*}}/g;
+   
+    template=`
+   <div style='display: flex; align-items: center;'><img src='{{ ImageURL }}' alt='User Image' height='120px' style='margin-right: 10px;'>
+   <div><div style='font-size:20px; color:#008000'><b>{{ Firstname }}</b> <b>{{ Lastname }}</b></div><div>{{ Role }}</div>
+   <div style='display: inline-block;'><h6>Mob: </h6></div><span style='display: inline-block;'>{{ ContactNo }}</span>
+   <div><i class='fab fa-twitter'></i><a> {{ TwitterLink }}</a></div>
+   <div><i class='fab fa-facebook'></i> {{ FacebookLink }}</div></div></div>`
+
+      matches = this.template.match(this.pattern);
+      // console.log("MATCHES :",matches: any);
+      if (matches: any[]) {
+        matches.forEach((match) => {
+          const variable = match.replace('{{', '').replace('}}', '').trim();
+          console.log("VARIABLE :",variable);
+          this.fieldNames.push(variable);
+        }
+        )
+      }
 
   ngOnInit(): void {
 
-    this.initializeForm();
-   // this.logIds();
-    
-    let template='<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
+        const pattern = /{{\s*(\w+)\s*}}/g;
+       
+    let template=`
+  <div style='display: flex; align-items: center;'><img src='{{ ImageURL }}' alt='User Image' height='120px' style='margin-right: 10px;'>
+  <div><div style='font-size:20px; color:#008000'><b>{{ Firstname }}</b> <b>{{ Lastname }}</b></div><div>{{ Role }}</div>
+  <div style='display: inline-block;'><h6>Mob: </h6></div><span style='display: inline-block;'>{{ ContactNo }}</span>
+  <div><i class='fab fa-twitter'></i><a> {{ TwitterLink }}</a></div>
+  <div><i class='fab fa-facebook'></i> {{ FacebookLink }}</div></div></div>`
 
-    $('#summernote').summernote(
-      {
-        callbacks: {
-          onInit: function() {
-        $('#summernote').summernote('code', template);
-          },
-          onChange: (content: string, $editable: any) => {
-           $('#preview').html(content);
-           this.previewContent = $('#preview').val(content);
-          const storageString = JSON.stringify(this.previewContent);
-          localStorage.setItem('Preview Content', storageString);  
-
-          },
-
-        },
-        
-      height: 350,
-       width:800
-      },
-      
-      );
-     
-  }
-
-  // onValueChange(index: number, value: string, fieldIndex: number) {
-
-  //   let pattern = /{{\s*(\w+)\s*}}/g;
-  //   let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div>';
-
-  //   let matches = template.match(pattern);
-  //   console.log(matches);
-  //   if (matches) {
-  //     matches.forEach((match) => {
-
-  //       let variable = match.replace('{{', '').replace('}}', '').trim();
-  //       console.log(variable);
-
-  //       if (variable === this.fieldNames[index] + '1'  && index === fieldIndex) {
-  //         console.log(fieldIndex);
-  //         template = template.replace(match, value);
-  //         console.log(value);
-  //       }
-
-  //       // if (variable === 'firstname1' && index === fieldIndex) {
-  //       //   console.log(fieldIndex);
-  //       //   template = template.replace(match, value);
-  //       //   console.log(value);
-  //       // }
-
-  //       // if (variable === 'lastname1' && index === fieldIndex) {
-  //       //   console.log(fieldIndex);
-  //       //   template = template.replace(match, value);
-  //       //   console.log(value);
-  //       // }
-
-  //     //   if (variable === 'firstname1' && index==0) {
-          
-  //     //     console.log(fieldIndex);
-  //     // //    console.log(match);
-  //     //     template = template.replace(match, value);
-  //     //     console.log(value);
-  //     //     $('#summernote').summernote('code', template);
-  //     //   }
-
-  //     //   if (variable === 'lastname1' && index==1) {
-  //     //     console.log(fieldIndex);
-  //     //    // console.log(match);
-  //     //     template = template.replace(match, value);
-  //     //     console.log(value);
-  //     //     $('#summernote').summernote('code', template);
-  //     //   }
-
-  //     });
-  //   }
-
-  //   $('#summernote').summernote('code', template);
-  // }
-
-  onValueChange(index: number, value: string, fieldIndex: number) {
-    const pattern = /{{\s*(\w+)\s*}}/g;
-    let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
-  
-    const matches = template.match(pattern);
-    console.log(matches);
-  
-    if (matches) {
-
-      matches.forEach((match) => {
-        const variable = match.replace('{{', '').replace('}}', '').trim();
-        console.log(variable);
-        
-        if (variable === this.fieldNames[index] + '1' && index === fieldIndex) {
-          template = template.replace(match, value);
-        } 
-        else {
-          const controlIndex = this.fieldNames.findIndex(name => name + '1' === variable);
-          console.log(controlIndex);
-          const controlValue = this.valueControls[controlIndex].value;
-          console.log(controlValue);
-          template = template.replace(match, controlValue);
+        const matches = this.template.match(this.pattern);
+        if (matches) {
+          matches.forEach((match) => {
+            const variable = match.replace('{{', '').replace('}}', '').trim();
+            console.log("VARIABLE :",variable);
+            this.fieldNames.push(variable);
+          }
+          )
         }
-      });
-    }
+        this.initializeForm();
+        $('#summernote').summernote(
+          {
+            callbacks: {
+              onInit: function() {
+            $('#summernote').summernote('code', template);
+            $('#summernote').summernote('disable');
+              },
+              onChange: (content: string, $editable: any) => {
+               $('#preview').html(content);
+               this.previewContent = $('#preview').val(content);
+              const storageString = JSON.stringify(this.previewContent);
+              localStorage.setItem('Preview Content', storageString);
+              },
+            },
+            height: 350,
+            width:800
+          },
+          );
+          let value1 = localStorage.getItem('Preview Content');
+          //  console.log(value1);
+           let str = value1;
+           str = String(str);
+           var obj=JSON.parse(str);
+           console.log(obj);
+           console.log(obj[0].value);
+            if(value1)
+            {
+             $('#previewprevious').html(obj[0].value);
+            }
+      }
+
+onValueChange(index: number, value: string, fieldIndex: number) {
+
+    const pattern = /{{\s*(\w+)\s*}}/g;
   
-    $('#summernote').summernote('code', template);
-  }
-  
-  
+    let template=`
+      <div style='display: flex; align-items: center;'><img src='{{ ImageURL }}' alt='User Image' height='120px' style='margin-right: 10px;'>
+      <div><div style='font-size:20px; color:#008000'><b>{{ Firstname }}</b> <b>{{ Lastname }}</b></div><div>{{ Role }}</div>
+      <div style='display: inline-block;'><h6>Mob: </h6></div><span style='display: inline-block;'>{{ ContactNo }}</span>
+      <div><i class='fab fa-twitter'></i><a> {{ TwitterLink }}</a></div>
+      <div><i class='fab fa-facebook'></i> {{ FacebookLink }}</div></div></div>`
+
+        const matches = template.match(pattern);
+        console.log("MATCHES :",matches);
+        if (matches) {
+          matches.forEach((match) => {
+            const variable = match.replace('{{', '').replace('}}', '').trim();
+            console.log("VARIABLE :",variable);
+            this.fieldNames.push(variable);
+            console.log("FIELD NAMES :",this.fieldNames);
+            if (variable === this.fieldNames[index] && index === fieldIndex)
+            {
+              template = template.replace(match, value);
+              $('#summernote').summernote('code', template);
+            }
+            else
+            {
+              const controlIndex = this.fieldNames.findIndex(name => name === variable);
+              console.log(controlIndex);
+              const controlValue = this.valueControls[controlIndex].value;
+              console.log(controlValue);
+              template = template.replace(match, controlValue);
+              // $('#summernote').summernote('code', template);
+            }
+          });
+        }
+        
+        $('#summernote').summernote('code', template);
+        $('#summernote').summernote('disable');
+        $('#preview').html(template);
+          this.previewContent = $('#preview').val(template);
+         const storageString = JSON.stringify(this.previewContent);
+         localStorage.setItem('Preview Content', storageString);
+        let value1 = localStorage.getItem('Preview Content');
+         let str = value1;
+         str = String(str);
+         var obj=JSON.parse(str);
+         console.log(obj);
+         console.log("OBJ : ",obj[0].value);
+          if(value1)
+          {
+           $('#previewprevious').html(obj[0].value);
+          }
+      }
+
   initializeForm() {
-  
-    let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
-    const interpolationTagsCount = (template.match(/\{\{[^{}]+\}\}/g) || []).length;
-    this.values = new FormArray<FormControl>([]);
-    for (let i = 0; i < interpolationTagsCount; i++) {
-      this.values.push(new FormControl(''));
-      
-    }
-    this.form = new FormGroup({
-      values: this.values
-     
-    });
-    // console.log(this.values);
-  }
+
+    let template=`
+    <div style='display: flex; align-items: center;'><img src='{{ ImageURL }}' alt='User Image' height='120px' style='margin-right: 10px;'>
+    <div><div style='font-size:20px; color:#008000'><b>{{ Firstname }}</b> <b>{{ Lastname }}</b></div><div>{{ Role }}</div>
+    <div style='display: inline-block;'><h6>Mob: </h6></div><span style='display: inline-block;'>{{ ContactNo }}</span>
+    <div><i class='fab fa-twitter'></i><a> {{ TwitterLink }}</a></div>
+    <div><i class='fab fa-facebook'></i> {{ FacebookLink }}</div></div></div>`
+
+
+       const interpolationTagsCount = (template.match(/\{\{[^{}]+\}\}/g) || []).length;
+        this.values = new FormArray<FormControl>([]);
+        for (let i = 0; i < interpolationTagsCount; i++) {
+          this.values.push(new FormControl(''));
+        }
+        this.form = new FormGroup({
+          values: this.values
+        });
+      }
 
   get valueControls() {
     return (this.form.get('values') as FormArray).controls;
-  }
-  
- 
-
-  ChangeContentInSummernote() {
-  let fn = $('#firstname').val();
-    let ln = $('#lastname').val();
-    let template = `<div id="op-firstname">${ fn }</div><div><b><br></b></div><div><b><br></b></div><div><b><i id="op-lastname">${ ln }</i></b></div>`;
-    $('#summernote').summernote('code',template);
   }
 
   copyContent(){
@@ -172,11 +177,9 @@ export class FormGenerateComponent implements OnInit{
     tempTextArea.select();
     document.execCommand('copy');
     tempTextArea.remove();
-    
   }
 
   copyContentwithSourceCode(){
-
     const previewContent: string = $('#preview').html();
     const tempTextArea = $('<textarea></textarea>');
     tempTextArea.val(previewContent).css('opacity', '0');
@@ -184,7 +187,6 @@ export class FormGenerateComponent implements OnInit{
     tempTextArea.select();
     document.execCommand('copy');
     tempTextArea.remove();
-   
   }
 }
 

@@ -1,0 +1,24 @@
+.register-container{
+    font-family: "Times New Roman", Times, serif;
+}
+
+h1 {
+    padding-left: 10%;
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    font-weight: bold;
+}
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+}
+table {
+    padding-left: 5%;
+    padding-right: 7%;
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 2px;
+}

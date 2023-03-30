@@ -1,26 +1,20 @@
-<h4>Summernote Editor</h4><br>
-<textarea id="summernote" [innerHTML]="editorContent" class="previous" disabled></textarea>
+<div class="total">
+<br><h4>SUMMERNOTE EDITOR</h4><br>
+<textarea id="summernote" [innerHTML]="editorContent" class="previous" [(ngModel)]="content"></textarea>
 <p id="demo"></p>
 <br>
+<button (click)="copyContent()" class="btn btn-primary">Copy content</button><br>
+<br>
+<button (click)="copyContentwithSourceCode()" class="btn btn-primary">Copy with Sourcecode</button>
+<br><br>
 
-   <!-- <form [formGroup]="form">
+<form [formGroup]="form">
     <div formArrayName="values">
       <div *ngFor="let control of valueControls; let i = index">
-       
-        <label for="value{{i}}">Value {{i}}:</label>
-        <input type="text" [formControlName]="i" id="value{{i}}" (change)="onValueChange(i, control.value,i)">
+        <label for="value{{i}}">{{ fieldNames[i] }} : &nbsp; </label>
+        <input type="text" [formControlName]="i" id="value{{i}}" (change)="onValueChange(i, control.value, i)">
       </div>
     </div>
-  </form> -->
-   <!-- <label for="{{i === 0 ? 'firstname' : 'lastname'}}">Value {{i}}:</label>
-        <input type="text" [formControlName]="i" id="{{i === 0 ? 'firstname' : 'lastname'}}"> -->
+</form>
 
-        <form [formGroup]="form">
-          <div formArrayName="values">
-            <div *ngFor="let control of valueControls; let i = index">
-              <label for="value{{i}}">Value {{i}}:</label>
-              <input type="text" [formControlName]="i" id="value{{i}}" (change)="onValueChange(i, control.value, i)">
-            </div>
-          </div>
-        </form>
-        
+</div>
