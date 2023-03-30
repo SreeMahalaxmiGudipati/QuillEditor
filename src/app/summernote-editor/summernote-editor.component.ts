@@ -14,16 +14,13 @@ export class SummernoteEditorComponent implements OnInit {
   form!: FormGroup;
   values!: FormArray<FormControl>;
 
-  Names:string[] =['Firstname','Lastname','Role','Contact No','Twitter','Facebook','ImageURL'];
+  Names:string[] =['ImageURL','Firstname','Lastname','Role','Contact No','Twitter','Facebook'];
   variablenames :string[] =[];
   editorContent!: string;
   previewContent!:string;
   SourcecodeInEditor!:string;
-  imageUrl = 'https://static.businessworld.in/article/article_extra_large_image/1626851488_AyxrRq_thumbnail_Outplay_sales_engagement_platform_1_95_.png';
 
-  constructor(private authservice:AuthService) {
-
-  }
+  constructor(private authservice:AuthService) {}
 
   ngOnInit(): void {
 
@@ -33,15 +30,23 @@ export class SummernoteEditorComponent implements OnInit {
   //  let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
 
   let template=`
-  <div style="font-size:20px;"><b>{{ firstname }}</b> <b>{{ lastname }}</b></div><div>{{ role }}</div>
-  <div><h6>Mob: {{ MobileNumber }} </h6> </div><div><i class="fab fa-twitter"></i> {{ TwitterLink }}</div>
-  <div><i class="fab fa-facebook"></i> {{ FacebookLink }}</div><img src="{{ imageUrl }}" alt="User Image" height=100px>`
+  <div style="display: flex; align-items: center;">
+  <img src="{{ ImageURL }}" alt="User Image" height="120px" style="margin-right: 10px;">
+  <div>
+    <div style="font-size:20px; color:#008000"><b>{{ Firstname }}</b> <b>{{ Lastname }}</b></div>
+    <div>{{ Role }}</div>
+    <div style="display: inline-block;"><h6>Mob: </h6></div><span style="display: inline-block;">{{ ContactNo }}</span>
+    <div><i class="fab fa-twitter"></i><a> {{ TwitterLink }}</a></div>
+    <div><i class="fab fa-facebook"></i> {{ FacebookLink }}</div>
+  </div>
+</div>`
+
   $('#summernote').summernote(
       {
         callbacks: {
           onInit: function() {
         $('#summernote').summernote('code', template);
-        // $('#summernote').summernote('disable');
+       $('#summernote').summernote('disable');
           },
           onChange: (content: string, $editable: any) => {
            $('#preview').html(content);
@@ -74,9 +79,17 @@ export class SummernoteEditorComponent implements OnInit {
 
   //  let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
   let template=`
-  <div style="font-size:20px;"><b>{{ firstname }}</b> <b>{{ lastname }}</b></div><div>{{ role }}</div>
-  <div><h6>Mob: {{ MobileNumber }} </h6> </div><div><i class="fab fa-twitter"></i> {{ TwitterLink }}</div>
-  <div><i class="fab fa-facebook"></i> {{ FacebookLink }}</div><img src="{{ imageUrl }}" alt="User Image" height=100px>`
+  <div style="display: flex; align-items: center;">
+  <img src="{{ ImageURL }}" alt="User Image" height="120px" style="margin-right: 10px;">
+  <div>
+    <div style="font-size:20px; color:#008000"><b>{{ Firstname }}</b> <b>{{ Lastname }}</b></div>
+    <div>{{ Role }}</div>
+    <div style="display: inline-block;"><h6>Mob: </h6></div><span style="display: inline-block;">{{ ContactNo }}</span>
+    <div><i class="fab fa-twitter"></i><a> {{ TwitterLink }}</a></div>
+    <div><i class="fab fa-facebook"></i> {{ FacebookLink }}</div>
+  </div>
+</div>`
+
     const matches = template.match(pattern);
     console.log(matches);
   
@@ -112,9 +125,17 @@ export class SummernoteEditorComponent implements OnInit {
   initializeForm() {
   //  let template = '<div>{{ firstname1 }}</div><div><b><br></b></div><div><b><br></b></div><div><b><i>{{ lastname1 }}</i></b></div><div><b><br></b></div><div><b><i>{{ name1 }}</i></b></div>';
   let template=`
-  <div style="font-size:20px;"><b>{{ firstname }}</b> <b>{{ lastname }}</b></div><div>{{ role }}</div>
-  <div><h6>Mob: {{ MobileNumber }} </h6> </div><div><i class="fab fa-twitter"></i> {{ TwitterLink }}</div>
-  <div><i class="fab fa-facebook"></i> {{ FacebookLink }}</div><img src="{{ imageUrl }}" alt="User Image" height=100px>`
+  <div style="display: flex; align-items: center;">
+  <img src="{{ ImageURL }}" alt="User Image" height="120px" style="margin-right: 10px;">
+  <div>
+    <div style="font-size:20px; color:#008000"><b>{{ Firstname }}</b> <b>{{ Lastname }}</b></div>
+    <div>{{ Role }}</div>
+    <div style="display: inline-block;"><h6>Mob: </h6></div><span style="display: inline-block;">{{ ContactNo }}</span>
+    <div><i class="fab fa-twitter"></i><a> {{ TwitterLink }}</a></div>
+    <div><i class="fab fa-facebook"></i> {{ FacebookLink }}</div>
+  </div>
+</div>`
+
 
   const interpolationTagsCount = (template.match(/\{\{[^{}]+\}\}/g) || []).length;
     this.values = new FormArray<FormControl>([]);
