@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Template } from 'src/models/template.model';
 import { ModelserviceService } from '../modelservice.service';
+declare var $: any;
 
 @Component({
   selector: 'app-all-templates',
@@ -11,9 +13,9 @@ export class AllTemplatesComponent {
 
   data:any;
   searchValue:  string = '';
-  templates!: Template[];
+  CSStemplates: string[] = [];
 
-  constructor(private modelservice:ModelserviceService){
+  constructor(private modelservice:ModelserviceService,private router:Router){
     this.getData();
   }
 
@@ -23,6 +25,20 @@ export class AllTemplatesComponent {
     {
       this.data=data;
        console.log(this.data);
+
+       this.data.forEach((item: any) => {
+        console.log(item.templates);
+        const variable = $('#eachtemplate').html(item.templates);
+        
+        this.CSStemplates.push(variable.html());
+        console.log("Templates", this.CSStemplates);
+      });
+      
     });
   }
+
+  redirectToDestination(id:any) {
+    this.router.navigate(['/formgenerate/'+id]);
+  }
+
 }

@@ -1,12 +1,9 @@
 <div class="total">
 <br><h4>SUMMERNOTE EDITOR</h4><br>
-<textarea id="summernote" [innerHTML]="editorContent" class="previous" [(ngModel)]="content"></textarea>
+<textarea id="summernote" [innerHTML]="editorContent"></textarea>
 <p id="demo"></p>
 <br>
-<button (click)="copyContent()" class="btn btn-primary">Copy content</button><br>
-<br>
-<button (click)="copyContentwithSourceCode()" class="btn btn-primary">Copy with Sourcecode</button>
-<br><br>
+
 
 <form [formGroup]="form">
     <div formArrayName="values">

@@ -12,13 +12,28 @@
         </tr>
         </thead>
         <tbody>
-                <tr *ngFor="let StudentItem of data">
-                    <td>{{StudentItem.id}}</td>
-                    <td [innerHTML]="StudentItem.templates"></td>
+                <tr *ngFor="let Item of data">
+                    <td>{{Item.id}}</td>
+                    <td [innerHTML]="Item.templates"></td>
+                    <!-- <td><p id="eachtemplate"></p></td> -->
                     <td>
-                        <button type="button" class="btn btn-success">Select</button>
+                        <button type="button" class="btn btn-success" (click)="redirectToDestination(Item.id)">Select</button>
                     </td>
+                    <!-- <p>Hello</p>
+                    <p id="eachtemplate"></p> -->
+
                 </tr>
         </tbody>
     
     </table>
+
+<p id="eachtemplate"></p>
+
+<!-- <div *ngFor="let item of CSStemplates">
+<p>{{ CSStemplates[i] }}</p>
+</div> -->
+<ng-container *ngFor="let i of [0, 1, 2];">
+    <p id="eachtemplate">{{ CSStemplates[i] }}</p>
+    <!-- <div> {{ CSStemplates[i] }} </div> -->
+  </ng-container>
+  

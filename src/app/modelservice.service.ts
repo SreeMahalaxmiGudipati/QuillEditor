@@ -15,5 +15,8 @@ export class ModelserviceService {
     return this.http.get<Template[]>(this.baseUrl);
    }
 
+   getDetailsById(id:any): Observable<Template[]>  {
+    return this.http.get<Template[]>(this.baseUrl+'/'+id);
+   }
 
 }

@@ -21,6 +21,7 @@ const routes: Routes = [
     {path:'templates',component:AllTemplatesComponent},
   {path:'summernoteEditor',component:SummernoteEditorComponent},
   {path:'formgenerate',component:FormGenerateComponent},
+  {path:'formgenerate/:id',component:FormGenerateComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:Register1Component},
   {path:'both1',component:BackupformComponent}

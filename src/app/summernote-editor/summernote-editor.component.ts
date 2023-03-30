@@ -19,47 +19,30 @@ export class SummernoteEditorComponent implements OnInit {
   fieldNames: string[] = [];
   constructor() {}
 
-   //Dynamic labels
-   pattern = /{{\s*(\w+)\s*}}/g;
-   
-    template=`
-   <div style='display: flex; align-items: center;'><img src='{{ ImageURL }}' alt='User Image' height='120px' style='margin-right: 10px;'>
-   <div><div style='font-size:20px; color:#008000'><b>{{ Firstname }}</b> <b>{{ Lastname }}</b></div><div>{{ Role }}</div>
-   <div style='display: inline-block;'><h6>Mob: </h6></div><span style='display: inline-block;'>{{ ContactNo }}</span>
-   <div><i class='fab fa-twitter'></i><a> {{ TwitterLink }}</a></div>
-   <div><i class='fab fa-facebook'></i> {{ FacebookLink }}</div></div></div>`
-
-      matches = this.template.match(this.pattern);
-      // console.log("MATCHES :",matches: any);
-      if (matches: any[]) {
-        matches.forEach((match) => {
-          const variable = match.replace('{{', '').replace('}}', '').trim();
-          console.log("VARIABLE :",variable);
-          this.fieldNames.push(variable);
-        }
-        )
-      }
 
   ngOnInit(): void {
 
-        const pattern = /{{\s*(\w+)\s*}}/g;
+    const pattern = /{{\s*(\w+)\s*}}/g;
        
     let template=`
   <div style='display: flex; align-items: center;'><img src='{{ ImageURL }}' alt='User Image' height='120px' style='margin-right: 10px;'>
   <div><div style='font-size:20px; color:#008000'><b>{{ Firstname }}</b> <b>{{ Lastname }}</b></div><div>{{ Role }}</div>
   <div style='display: inline-block;'><h6>Mob: </h6></div><span style='display: inline-block;'>{{ ContactNo }}</span>
   <div><i class='fab fa-twitter'></i><a> {{ TwitterLink }}</a></div>
-  <div><i class='fab fa-facebook'></i> {{ FacebookLink }}</div></div></div>`
+  <div><i class='fab fa-facebook'></i> {{ FacebookLink }}</div></div></div>`;
 
-        const matches = this.template.match(this.pattern);
-        if (matches) {
-          matches.forEach((match) => {
-            const variable = match.replace('{{', '').replace('}}', '').trim();
-            console.log("VARIABLE :",variable);
-            this.fieldNames.push(variable);
-          }
-          )
-        }
+
+  //Dynamic labels
+  const matches = template.match(pattern);
+  if (matches) {
+    matches.forEach((match) => {
+      const variable = match.replace('{{', '').replace('}}', '').trim();
+      this.fieldNames.push(variable);
+     
+    }
+    )
+  }
+
         this.initializeForm();
         $('#summernote').summernote(
           {
@@ -129,21 +112,7 @@ onValueChange(index: number, value: string, fieldIndex: number) {
         }
         
         $('#summernote').summernote('code', template);
-        $('#summernote').summernote('disable');
-        $('#preview').html(template);
-          this.previewContent = $('#preview').val(template);
-         const storageString = JSON.stringify(this.previewContent);
-         localStorage.setItem('Preview Content', storageString);
-        let value1 = localStorage.getItem('Preview Content');
-         let str = value1;
-         str = String(str);
-         var obj=JSON.parse(str);
-         console.log(obj);
-         console.log("OBJ : ",obj[0].value);
-          if(value1)
-          {
-           $('#previewprevious').html(obj[0].value);
-          }
+       
       }
 
   initializeForm() {
