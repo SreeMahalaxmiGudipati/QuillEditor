@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { QuillModule } from 'ngx-quill';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Register1Component } from './register1/register1.component';
 import { ModelserviceService } from './modelservice.service';
 import { AllTemplatesComponent } from './all-templates/all-templates.component';
-
+import { SafePipe } from 'src/safe.pipe';
 
 
 @NgModule({
@@ -33,7 +33,8 @@ import { AllTemplatesComponent } from './all-templates/all-templates.component';
     BackupformComponent,
     LoginComponent,
     Register1Component,
-    AllTemplatesComponent
+    AllTemplatesComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,

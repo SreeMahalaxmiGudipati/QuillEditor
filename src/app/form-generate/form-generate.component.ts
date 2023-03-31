@@ -11,7 +11,7 @@ declare var $: any;
   templateUrl: './form-generate.component.html',
   styleUrls: ['./form-generate.component.css']
 })
-export class FormGenerateComponent {
+export class FormGenerateComponent implements OnInit{
   content!: string;
   form!: FormGroup;
   values!: FormArray<FormControl>;
@@ -26,13 +26,17 @@ export class FormGenerateComponent {
   id:any;
 
   constructor(private modelservice:ModelserviceService,private route:ActivatedRoute) {
-    this.id=this.route.snapshot.params['id'];
-    this.getTemplateById();
-    let template=this.selectedtemplate.templates;
-  console.log("Template1",template);
+  //   this.id=this.route.snapshot.params['id'];
+  //   this.getTemplateById();
+  //   let template=this.selectedtemplate.templates;
+  // console.log("Template1",template);
    
   }
-
+  ngOnInit(): void {
+    this.id=this.route.snapshot.params['id'];
+    this.getTemplateById();
+  }
+  
 
   EditorIntegrate() {
 
@@ -72,12 +76,29 @@ export class FormGenerateComponent {
                this.previewContent = $('#preview').val(content);
               const storageString = JSON.stringify(this.previewContent);
               localStorage.setItem('Preview Content', storageString);
+              let original=this.selectedtemplate.originalTemplates;
+              console.log("Original template",original);
+              $('#originalpreview').html(original);
               },
             },
             height: 350,
             width:800
           },
           );
+          let original=this.selectedtemplate.originalTemplates;
+          console.log("Original template",original);
+          $('#originalpreview').val(original);
+          // let value1 = localStorage.getItem('Preview Content');
+          // //  console.log(value1);
+          //  let str = value1;
+          //  str = String(str);
+          //  var obj=JSON.parse(str);
+          //  console.log(obj);
+          //  console.log(obj[0].value);
+          //   if(value1)
+          //   {
+          //    $('#previewprevious').html(obj[0].value);
+          //   }
           
       }
 
@@ -94,6 +115,10 @@ onValueChange(index: number, value: string, fieldIndex: number) {
 
     let template=this.selectedtemplate.templates;
   console.log("Template1",template);
+
+  let original=this.selectedtemplate.originalTemplates;
+  console.log("Original template",original);
+  $('#originalpreview').html(original);
 
         const matches = template.match(pattern);
         console.log("MATCHES :",matches);
@@ -123,6 +148,9 @@ onValueChange(index: number, value: string, fieldIndex: number) {
         }
         
         $('#summernote').summernote('code', template);
+
+       
+
        
       }
 
@@ -138,6 +166,9 @@ onValueChange(index: number, value: string, fieldIndex: number) {
     let template=this.selectedtemplate.templates;
   console.log("Template1",template);
 
+  let original=this.selectedtemplate.originalTemplates;
+  console.log("Original template",original);
+  $('#originalpreview').html(original);
 
        const interpolationTagsCount = (template.match(/\{\{[^{}]+\}\}/g) || []).length;
         this.values = new FormArray<FormControl>([]);
@@ -153,6 +184,26 @@ onValueChange(index: number, value: string, fieldIndex: number) {
     return (this.form.get('values') as FormArray).controls;
   }
 
+  copyContent(){
+    const previewContent: string = $('#preview').text();
+    const tempTextArea = $('<textarea></textarea>');
+    tempTextArea.val(previewContent).css('opacity', '0');
+    $('body').append(tempTextArea);
+    tempTextArea.select();
+    document.execCommand('copy');
+    tempTextArea.remove();
+  }
+
+  copyContentwithSourceCode(){
+    const previewContent: string = $('#preview').html();
+    const tempTextArea = $('<textarea></textarea>');
+    tempTextArea.val(previewContent).css('opacity', '0');
+    $('body').append(tempTextArea);
+    tempTextArea.select();
+    document.execCommand('copy');
+    tempTextArea.remove();
+  }
+
  
 
   setvalues(data:any){
@@ -162,6 +213,7 @@ onValueChange(index: number, value: string, fieldIndex: number) {
     console.log("Edit over");
     console.log(data);
     this.EditorIntegrate();
+    
   }
 
   getTemplateById(){

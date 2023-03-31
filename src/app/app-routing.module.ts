@@ -18,6 +18,7 @@ const routes: Routes = [
   {path:'preview',component:PreviewComponent},
 //  {path:'both',component:BothComponent,canActivate:[AuthGuard]},
    {path:'both',component:BothComponent},
+   {path:'both/:id',component:BothComponent},
     {path:'templates',component:AllTemplatesComponent},
   {path:'summernoteEditor',component:SummernoteEditorComponent},
   {path:'formgenerate',component:FormGenerateComponent},

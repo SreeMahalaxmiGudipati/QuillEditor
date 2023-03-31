@@ -3,6 +3,10 @@
 <textarea id="summernote" [innerHTML]="editorContent"></textarea>
 <p id="demo"></p>
 <br>
+<button (click)="copyContent()" class="btn btn-primary">Copy content</button><br>
+<br>
+<button (click)="copyContentwithSourceCode()" class="btn btn-primary">Copy with Sourcecode</button>
+<br><br>
 
 
 <form [formGroup]="form">
