@@ -149,9 +149,6 @@ onValueChange(index: number, value: string, fieldIndex: number) {
         
         $('#summernote').summernote('code', template);
 
-       
-
-       
       }
 
   initializeForm() {
@@ -209,6 +206,7 @@ onValueChange(index: number, value: string, fieldIndex: number) {
   setvalues(data:any){
     this.selectedtemplate.id=data.id;
     this.selectedtemplate.templates=data.templates;
+    this.selectedtemplate.originalTemplates=data.originalTemplates;
     console.log(this.selectedtemplate.templates);
     console.log("Edit over");
     console.log(data);
