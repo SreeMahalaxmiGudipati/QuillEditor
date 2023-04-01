@@ -1,9 +1,18 @@
 <div class="register-container">
     <h1>ALL TEMPLATES</h1>
 </div>
-    <br>
 
-    <table class="table">
+<div class="TemplateSelection">
+    <button type="button" class="btn btn-primary" id="allbtn">All Templates</button>
+    <button type="button" class="btn btn-primary" id="professionalbtn">Professional Templates</button>
+    <button type="button" class="btn btn-primary" id="friendlybtn">Friendly Templates</button>
+    <button type="button" class="btn btn-primary" id="modernbtn">Modern Templates</button>
+    <button type="button" class="btn btn-primary" id="elegantbtn">Elegant Templates</button>
+    <button type="button" class="btn btn-primary" id="creativebtn">Creative Templates</button>
+</div>
+
+<br>
+<table class="table">
         <thead>
         <tr>
                 <th>ID</th>
@@ -20,14 +29,118 @@
                     <td>
                         <button type="button" class="btn btn-success" (click)="redirectToDestination(Item.id)">Select</button>
                     </td>
-                    <!-- <td>{{ Item.templates }}</td> -->
-
                 </tr>
         </tbody>
-    
-    </table>
+</table>
+
+<!-- <div [innerHtml]="htmlSnippet | safe: 'html'"></div> -->
+<h3>Professional templates</h3>
+<table class="table">
+    <thead>
+    <tr>
+            <th>ID</th>
+            <th>Template</th>
+            <th>Original Template</th>
+            <th>SelectTemplate</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr *ngFor="let Item of professionaldata">
+                <td>{{Item.id}}</td>
+                <td [innerHtml]="Item.templates | safe: 'html'"></td>
+                <td [innerHtml]="Item.originalTemplates | safe: 'html'"></td>
+                <td>
+                    <button type="button" class="btn btn-success" (click)="redirectToDestination(Item.id)">Select</button>
+                </td>
+            </tr>
+    </tbody>
+</table>
 
 
+<h3>Friendly templates</h3>
+<table class="table">
+    <thead>
+    <tr>
+            <th>ID</th>
+            <th>Template</th>
+            <th>Original Template</th>
+            <th>SelectTemplate</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr *ngFor="let Item of friendlydata">
+                <td>{{Item.id}}</td>
+                <td [innerHtml]="Item.templates | safe: 'html'"></td>
+                <td [innerHtml]="Item.originalTemplates | safe: 'html'"></td>
+                <td>
+                    <button type="button" class="btn btn-success" (click)="redirectToDestination(Item.id)">Select</button>
+                </td>
+            </tr>
+    </tbody>
+</table>
 
-  <!-- <div [innerHtml]="htmlSnippet | safe: 'html'"></div> -->
+<h3>Modern templates</h3>
+<table class="table">
+    <thead>
+    <tr>
+            <th>ID</th>
+            <th>Template</th>
+            <th>Original Template</th>
+            <th>SelectTemplate</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr *ngFor="let Item of moderndata">
+                <td>{{Item.id}}</td>
+                <td [innerHtml]="Item.templates | safe: 'html'"></td>
+                <td [innerHtml]="Item.originalTemplates | safe: 'html'"></td>
+                <td>
+                    <button type="button" class="btn btn-success" (click)="redirectToDestination(Item.id)">Select</button>
+                </td>
+            </tr>
+    </tbody>
+</table>
 
+<h3>Elegant templates</h3>
+<table class="table">
+    <thead>
+    <tr>
+            <th>ID</th>
+            <th>Template</th>
+            <th>Original Template</th>
+            <th>SelectTemplate</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr *ngFor="let Item of elegantdata">
+                <td>{{Item.id}}</td>
+                <td [innerHtml]="Item.templates | safe: 'html'"></td>
+                <td [innerHtml]="Item.originalTemplates | safe: 'html'"></td>
+                <td>
+                    <button type="button" class="btn btn-success" (click)="redirectToDestination(Item.id)">Select</button>
+                </td>
+            </tr>
+    </tbody>
+</table>
+
+<h3>Creative templates</h3>
+<table class="table">
+    <thead>
+    <tr>
+            <th>ID</th>
+            <th>Template</th>
+            <th>Original Template</th>
+            <th>SelectTemplate</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr *ngFor="let Item of creativedata">
+                <td>{{Item.id}}</td>
+                <td [innerHtml]="Item.templates | safe: 'html'"></td>
+                <td [innerHtml]="Item.originalTemplates | safe: 'html'"></td>
+                <td>
+                    <button type="button" class="btn btn-success" (click)="redirectToDestination(Item.id)">Select</button>
+                </td>
+            </tr>
+    </tbody>
+</table>

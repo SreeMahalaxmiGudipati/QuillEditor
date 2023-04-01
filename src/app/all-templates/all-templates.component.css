@@ -22,3 +22,21 @@ table {
     text-indent: initial;
     border-spacing: 2px;
 }
+.TemplateSelection{
+    padding-left: 3%;
+}
+#professionalbtn{
+    margin-left: 3%;
+}
+#friendlybtn{
+    margin-left: 3%;
+}
+#modernbtn{
+    margin-left: 3%;
+}
+#elegantbtn{
+    margin-left: 3%;
+}
+#creativebtn{
+    margin-left: 3%;
+}

@@ -4,6 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Template } from 'src/models/template.model';
 import { ModelserviceService } from '../modelservice.service';
 import { UserService } from '../user.service';
+import { FriendlyService } from '../friendly.service';
+import { ModernService } from '../modern.service';
+import { ProfessionalService } from '../professional.service';
+import { ElegantService } from '../elegant.service';
+import { CreativeService } from '../creative.service';
 declare var $: any;
 
 @Component({
@@ -25,16 +30,24 @@ export class FormGenerateComponent implements OnInit{
   data:any;
   id:any;
 
-  constructor(private modelservice:ModelserviceService,private route:ActivatedRoute) {
-  //   this.id=this.route.snapshot.params['id'];
-  //   this.getTemplateById();
-  //   let template=this.selectedtemplate.templates;
-  // console.log("Template1",template);
+  constructor(private modelservice:ModelserviceService,private route:ActivatedRoute,private friendlyservice:FriendlyService
+    ,private professionalservice:ProfessionalService,private modernservice:ModernService,
+    private elegantservice:ElegantService,private creativeservice:CreativeService) {
+
+    this.id=this.route.snapshot.params['id'];
+    this.getTemplateById();
+    this.getProfessionalTemplateById();
+    this.getFriendlyTemplateById();
+    this.getModernTemplateById();
+    this.getElegantTemplateById();
+    this.getCreativeTemplateById();
+    let template=this.selectedtemplate.templates;
+  console.log("Template1",template);
    
   }
   ngOnInit(): void {
-    this.id=this.route.snapshot.params['id'];
-    this.getTemplateById();
+    // this.id=this.route.snapshot.params['id'];
+    // this.getTemplateById();
   }
   
 
@@ -88,17 +101,6 @@ export class FormGenerateComponent implements OnInit{
           let original=this.selectedtemplate.originalTemplates;
           console.log("Original template",original);
           $('#originalpreview').val(original);
-          // let value1 = localStorage.getItem('Preview Content');
-          // //  console.log(value1);
-          //  let str = value1;
-          //  str = String(str);
-          //  var obj=JSON.parse(str);
-          //  console.log(obj);
-          //  console.log(obj[0].value);
-          //   if(value1)
-          //   {
-          //    $('#previewprevious').html(obj[0].value);
-          //   }
           
       }
 
@@ -113,7 +115,7 @@ onValueChange(index: number, value: string, fieldIndex: number) {
     //   <div><i class='fab fa-twitter'></i><a> {{ TwitterLink }}</a></div>
     //   <div><i class='fab fa-facebook'></i> {{ FacebookLink }}</div></div></div>`
 
-    let template=this.selectedtemplate.templates;
+  let template=this.selectedtemplate.templates;
   console.log("Template1",template);
 
   let original=this.selectedtemplate.originalTemplates;
@@ -160,11 +162,11 @@ onValueChange(index: number, value: string, fieldIndex: number) {
     // <div><i class='fab fa-twitter'></i><a> {{ TwitterLink }}</a></div>
     // <div><i class='fab fa-facebook'></i> {{ FacebookLink }}</div></div></div>`
 
-    let template=this.selectedtemplate.templates;
-  console.log("Template1",template);
+  let template=this.selectedtemplate.templates;
+  // console.log("Template1",template);
 
   let original=this.selectedtemplate.originalTemplates;
-  console.log("Original template",original);
+  // console.log("Original template",original);
   $('#originalpreview').html(original);
 
        const interpolationTagsCount = (template.match(/\{\{[^{}]+\}\}/g) || []).length;
@@ -202,7 +204,6 @@ onValueChange(index: number, value: string, fieldIndex: number) {
   }
 
  
-
   setvalues(data:any){
     this.selectedtemplate.id=data.id;
     this.selectedtemplate.templates=data.templates;
@@ -216,6 +217,48 @@ onValueChange(index: number, value: string, fieldIndex: number) {
 
   getTemplateById(){
     this.modelservice.getDetailsById(this.id).subscribe((data:any)=>
+    {
+      this.data=data;
+      console.log(this.data);
+      this.setvalues(this.data);
+    })
+  }
+
+  getProfessionalTemplateById(){
+    this.professionalservice.getDetailsById(this.id).subscribe((data:any)=>
+    {
+      this.data=data;
+      console.log(this.data);
+      this.setvalues(this.data);
+    })
+  }
+  getFriendlyTemplateById(){
+    this.friendlyservice.getDetailsById(this.id).subscribe((data:any)=>
+    {
+      this.data=data;
+      console.log(this.data);
+      this.setvalues(this.data);
+    })
+  }
+  getModernTemplateById(){
+    this.modernservice.getDetailsById(this.id).subscribe((data:any)=>
+    {
+      this.data=data;
+      console.log(this.data);
+      this.setvalues(this.data);
+    })
+  }
+  getElegantTemplateById(){
+    this.elegantservice.getDetailsById(this.id).subscribe((data:any)=>
+    {
+      this.data=data;
+      console.log(this.data);
+      this.setvalues(this.data);
+    })
+  }
+
+  getCreativeTemplateById(){
+    this.creativeservice.getDetailsById(this.id).subscribe((data:any)=>
     {
       this.data=data;
       console.log(this.data);

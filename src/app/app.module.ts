@@ -19,6 +19,11 @@ import { Register1Component } from './register1/register1.component';
 import { ModelserviceService } from './modelservice.service';
 import { AllTemplatesComponent } from './all-templates/all-templates.component';
 import { SafePipe } from 'src/safe.pipe';
+import { FriendlyService } from './friendly.service';
+import { ProfessionalService } from './professional.service';
+import { ModernService } from './modern.service';
+import { ElegantService } from './elegant.service';
+import { CreativeService } from './creative.service';
 
 
 @NgModule({
@@ -46,7 +51,8 @@ import { SafePipe } from 'src/safe.pipe';
     AppRoutingModule,
     QuillModule.forRoot()
   ],
-  providers: [ModelserviceService,UserService, AuthGuard],
+  providers: [ModelserviceService,ProfessionalService,FriendlyService,ModernService,
+    ElegantService,CreativeService,UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
