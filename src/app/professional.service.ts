@@ -8,8 +8,17 @@ import { Template } from 'src/models/template.model';
 })
 export class ProfessionalService {
 
+  controllerName:any;
   private baseUrl ="http://localhost:5108/api/Professional";
   constructor(private http:HttpClient) { }
+
+  getProfessionalControllerName(){
+    const parts = this.baseUrl.split('/');
+    this.controllerName = parts.pop();
+    console.log("Professional Controller name:",this.controllerName);
+    return this.controllerName;
+    
+     }
 
   getAllTemplates() : Observable<Template[]>  {
     return this.http.get<Template[]>(this.baseUrl);

@@ -23,13 +23,13 @@
         </thead>
         <tbody>
                 <tr *ngFor="let Item of data">
-                    <td>{{Item.id}}</td>
+                     <td>{{Item.id}}</td>
                     <td [innerHtml]="Item.templates | safe: 'html'"></td>
-                    <td [innerHtml]="Item.originalTemplates | safe: 'html'"></td>
+                    <td [innerHtml]="Item.originalTemplates | safe: 'html'"></td> 
                     <td>
-                        <button type="button" class="btn btn-success" (click)="redirectToDestination(Item.id)">Select</button>
+                         <button type="button" class="btn btn-success" (click)="redirectToDestination(allcategory,Item.id)">Select</button> 
                     </td>
-                </tr>
+                </tr> 
         </tbody>
 </table>
 
@@ -50,7 +50,7 @@
                 <td [innerHtml]="Item.templates | safe: 'html'"></td>
                 <td [innerHtml]="Item.originalTemplates | safe: 'html'"></td>
                 <td>
-                    <button type="button" class="btn btn-success" (click)="redirectToDestination(Item.id)">Select</button>
+                    <button type="button" class="btn btn-success" (click)="redirectToDestination(professionalcategory,Item.id)">Select</button>
                 </td>
             </tr>
     </tbody>
@@ -73,7 +73,7 @@
                 <td [innerHtml]="Item.templates | safe: 'html'"></td>
                 <td [innerHtml]="Item.originalTemplates | safe: 'html'"></td>
                 <td>
-                    <button type="button" class="btn btn-success" (click)="redirectToDestination(Item.id)">Select</button>
+                    <button type="button" class="btn btn-success" (click)="redirectToDestination(friendlycategory,Item.id)">Select</button>
                 </td>
             </tr>
     </tbody>
@@ -95,7 +95,7 @@
                 <td [innerHtml]="Item.templates | safe: 'html'"></td>
                 <td [innerHtml]="Item.originalTemplates | safe: 'html'"></td>
                 <td>
-                    <button type="button" class="btn btn-success" (click)="redirectToDestination(Item.id)">Select</button>
+                    <button type="button" class="btn btn-success" (click)="redirectToDestination(moderncategory,Item.id)">Select</button>
                 </td>
             </tr>
     </tbody>
@@ -117,7 +117,7 @@
                 <td [innerHtml]="Item.templates | safe: 'html'"></td>
                 <td [innerHtml]="Item.originalTemplates | safe: 'html'"></td>
                 <td>
-                    <button type="button" class="btn btn-success" (click)="redirectToDestination(Item.id)">Select</button>
+                    <button type="button" class="btn btn-success" (click)="redirectToDestination(elegantcategory,Item.id)">Select</button>
                 </td>
             </tr>
     </tbody>
@@ -139,7 +139,7 @@
                 <td [innerHtml]="Item.templates | safe: 'html'"></td>
                 <td [innerHtml]="Item.originalTemplates | safe: 'html'"></td>
                 <td>
-                    <button type="button" class="btn btn-success" (click)="redirectToDestination(Item.id)">Select</button>
+                    <button type="button" class="btn btn-success" (click)="redirectToDestination(creativecategory,Item.id)">Select</button>
                 </td>
             </tr>
     </tbody>

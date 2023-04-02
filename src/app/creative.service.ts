@@ -9,7 +9,16 @@ import { Template } from 'src/models/template.model';
 export class CreativeService {
 
   private baseUrl ="http://localhost:5108/api/Creative";
+  controllerName: string | undefined;
   constructor(private http:HttpClient) { }
+
+  getCreativeControllerName(){
+    const parts = this.baseUrl.split('/');
+    this.controllerName = parts.pop();
+    console.log("Friendly Controller name:",this.controllerName);
+    return this.controllerName;
+    
+     }
 
   getAllTemplates() : Observable<Template[]>  {
     return this.http.get<Template[]>(this.baseUrl);

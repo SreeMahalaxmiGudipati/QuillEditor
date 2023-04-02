@@ -8,9 +8,20 @@ import { Template } from 'src/models/template.model';
 })
 export class FriendlyService {
 
-  private baseUrl ="http://localhost:5108/api/Friendly";
-  constructor(private http:HttpClient) { }
+  controllerName:any;
 
+  private baseUrl ="http://localhost:5108/api/Friendly";
+  constructor(private http:HttpClient) {
+   }
+
+   getFriendlyControllerName(){
+  const parts = this.baseUrl.split('/');
+  this.controllerName = parts.pop();
+  console.log("Friendly Controller name:",this.controllerName);
+  return this.controllerName;
+  
+   }
+ 
   getAllTemplates() : Observable<Template[]>  {
     return this.http.get<Template[]>(this.baseUrl);
    }

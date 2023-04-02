@@ -40,3 +40,13 @@ table {
 #creativebtn{
     margin-left: 3%;
 }
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* adjust the number of columns as needed */
+    grid-gap: 20px; /* adjust the gap between cells as needed */
+  }
+
+  .grid-item {
+    border: 1px solid #ccc; /* add borders to cells */
+    padding: 10px;
+  }

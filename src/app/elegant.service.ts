@@ -8,8 +8,18 @@ import { Template } from 'src/models/template.model';
 })
 export class ElegantService {
 
+  controllerName:any;
+
   private baseUrl ="http://localhost:5108/api/Elegant";
   constructor(private http:HttpClient) { }
+
+  getElegantControllerName(){
+    const parts = this.baseUrl.split('/');
+    this.controllerName = parts.pop();
+    console.log("Elegant Controller name:",this.controllerName);
+    return this.controllerName;
+    
+     }
 
   getAllTemplates() : Observable<Template[]>  {
     return this.http.get<Template[]>(this.baseUrl);

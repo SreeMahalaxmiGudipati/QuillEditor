@@ -29,20 +29,41 @@ export class FormGenerateComponent implements OnInit{
 
   data:any;
   id:any;
+  Templatecategory:any;
 
   constructor(private modelservice:ModelserviceService,private route:ActivatedRoute,private friendlyservice:FriendlyService
     ,private professionalservice:ProfessionalService,private modernservice:ModernService,
     private elegantservice:ElegantService,private creativeservice:CreativeService) {
 
     this.id=this.route.snapshot.params['id'];
-    this.getTemplateById();
-    this.getProfessionalTemplateById();
-    this.getFriendlyTemplateById();
-    this.getModernTemplateById();
-    this.getElegantTemplateById();
-    this.getCreativeTemplateById();
+    console.log("Id:",this.id);
+
+    this.route.url.subscribe(segments => {
+      this.Templatecategory = segments[1].path;
+    });
+     console.log("TemplateCategory:",this.Templatecategory);
+     if(this.Templatecategory=='Templates'){
+         this.getTemplateById();
+    }
+     if(this.Templatecategory=='Professional'){
+      this.getProfessionalTemplateById();
+    }
+     if(this.Templatecategory=='Friendly'){
+      this.getFriendlyTemplateById();
+     }
+    
+     if(this.Templatecategory=='Modern'){
+       this.getModernTemplateById();
+     }
+     if(this.Templatecategory=='Elegant'){
+       this.getElegantTemplateById();
+     }
+     if(this.Templatecategory=='Creative'){
+          this.getCreativeTemplateById();
+     }
+     
     let template=this.selectedtemplate.templates;
-  console.log("Template1",template);
+  console.log("Selected Template",template);
    
   }
   ngOnInit(): void {

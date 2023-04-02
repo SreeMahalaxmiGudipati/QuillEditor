@@ -7,9 +7,18 @@ import {Template} from 'src/models/template.model';
   providedIn: 'root'
 })
 export class ModelserviceService {
+  controllerName:any;
 
   private baseUrl ="http://localhost:5108/api/Templates";
   constructor(private http:HttpClient) { }
+
+  getAllTemplatesControllerName(){
+    const parts = this.baseUrl.split('/');
+    this.controllerName = parts.pop();
+    console.log("AllTemplates Controller name:",this.controllerName);
+    return this.controllerName;
+    
+     }
 
   getAllTemplates() : Observable<Template[]>  {
     return this.http.get<Template[]>(this.baseUrl);
