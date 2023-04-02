@@ -2,17 +2,18 @@
     <h1>ALL TEMPLATES</h1>
 </div>
 
-<div class="TemplateSelection">
-    <button type="button" class="btn btn-primary" id="allbtn">All Templates</button>
-    <button type="button" class="btn btn-primary" id="professionalbtn">Professional Templates</button>
-    <button type="button" class="btn btn-primary" id="friendlybtn">Friendly Templates</button>
-    <button type="button" class="btn btn-primary" id="modernbtn">Modern Templates</button>
-    <button type="button" class="btn btn-primary" id="elegantbtn">Elegant Templates</button>
-    <button type="button" class="btn btn-primary" id="creativebtn">Creative Templates</button>
-</div>
+<div class="TemplateSelection" >
+    <button type="button" class="btn btn-primary" id="allbtn" (click)="Category = 'all'">All Templates</button>
+    <button type="button" class="btn btn-primary" id="professionalbtn" (click)="Category = 'professional'">Professional Templates</button>
+    <button type="button" class="btn btn-primary" id="friendlybtn" (click)="Category = 'friendly'">Friendly Templates</button>
+    <button type="button" class="btn btn-primary" id="modernbtn" (click)="Category = 'modern'">Modern Templates</button>
+    <button type="button" class="btn btn-primary" id="elegantbtn" (click)="Category = 'elegant'">Elegant Templates</button>
+    <button type="button" class="btn btn-primary" id="creativebtn" (click)="Category = 'creative'">Creative Templates</button>
+  </div>
 
 <br>
-
+<div [ngSwitch]="Category">
+<div *ngSwitchDefault>
 <h4>All Templates</h4>
 <div class="grid-container">
     <div class="grid-item" *ngFor="let Item of data">
@@ -20,7 +21,7 @@
       <button type="button" class="btn btn-success" (click)="redirectToDestination(allcategory, Item.id)">Select</button>
     </div>
   </div>
-  
+</div>  
   
 <!-- <table class="table">
         <thead>
@@ -44,6 +45,7 @@
 </table> -->
 
 <!-- <div [innerHtml]="htmlSnippet | safe: 'html'"></div> -->
+<div *ngSwitchCase="'professional'">
 <h4>Professional templates</h4>
 <div class="grid-container">
     <div class="grid-item" *ngFor="let Item of professionaldata">
@@ -51,6 +53,7 @@
       <button type="button" class="btn btn-success" (click)="redirectToDestination(professionalcategory, Item.id)">Select</button>
     </div>
   </div>
+</div>
 <!-- <table class="table">
     <thead>
     <tr>
@@ -72,7 +75,7 @@
     </tbody>
 </table> -->
 
-
+<div *ngSwitchCase="'friendly'">
 <h4>Friendly templates</h4>
 <div class="grid-container">
     <div class="grid-item" *ngFor="let Item of friendlydata">
@@ -80,6 +83,7 @@
       <button type="button" class="btn btn-success" (click)="redirectToDestination(friendlycategory, Item.id)">Select</button>
     </div>
   </div>
+</div>
 <!-- <table class="table">
     <thead>
     <tr>
@@ -100,7 +104,7 @@
             </tr>
     </tbody>
 </table> -->
-
+<div *ngSwitchCase="'modern'">
 <h4>Modern templates</h4>
 <div class="grid-container">
     <div class="grid-item" *ngFor="let Item of moderndata">
@@ -108,6 +112,7 @@
       <button type="button" class="btn btn-success" (click)="redirectToDestination(moderncategory, Item.id)">Select</button>
     </div>
   </div>
+</div>
 <!-- <table class="table">
     <thead>
     <tr>
@@ -128,7 +133,7 @@
             </tr>
     </tbody>
 </table> -->
-
+<div *ngSwitchCase="'elegant'">
 <h4>Elegant templates</h4>
 <div class="grid-container">
     <div class="grid-item" *ngFor="let Item of elegantdata">
@@ -136,6 +141,7 @@
       <button type="button" class="btn btn-success" (click)="redirectToDestination(elegantcategory, Item.id)">Select</button>
     </div>
   </div>
+</div>
 <!-- <table class="table">
     <thead>
     <tr>
@@ -156,7 +162,7 @@
             </tr>
     </tbody>
 </table> -->
-
+<div *ngSwitchCase="'creative'">
 <h4>Creative templates</h4>
 <div class="grid-container">
     <div class="grid-item" *ngFor="let Item of creativedata">
@@ -164,6 +170,7 @@
       <button type="button" class="btn btn-success" (click)="redirectToDestination(creativecategory, Item.id)">Select</button>
     </div>
   </div>
+</div>
 <!-- <table class="table">
     <thead>
     <tr>
@@ -184,3 +191,4 @@
             </tr>
     </tbody>
 </table> -->
+</div>

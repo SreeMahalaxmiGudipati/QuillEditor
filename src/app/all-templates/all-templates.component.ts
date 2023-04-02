@@ -16,6 +16,8 @@ declare var $: any;
   styleUrls: ['./all-templates.component.css']
 })
 export class AllTemplatesComponent {
+  
+  Category:any;
 
   data:any;
   professionaldata:any;
@@ -23,6 +25,7 @@ export class AllTemplatesComponent {
   elegantdata:any;
   creativedata:any;
   moderndata:any;
+
   allcategory:any;
   professionalcategory:any;
   friendlycategory:any;
