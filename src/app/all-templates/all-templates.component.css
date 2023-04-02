@@ -42,11 +42,16 @@ table {
 }
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* adjust the number of columns as needed */
-    grid-gap: 20px; /* adjust the gap between cells as needed */
-  }
-
-  .grid-item {
-    border: 1px solid #ccc; /* add borders to cells */
+  grid-template-columns: repeat(3, 1fr); 
+  grid-auto-rows: minmax(100px, auto);
+  grid-gap: 20px;
+ margin-left: 2%;
+}
+  
+  
+.grid-item {
+    border: 1px solid black;
     padding: 10px;
-  }
+     height: 280px;
+    width: 450px; 
+}

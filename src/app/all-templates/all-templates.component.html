@@ -12,7 +12,17 @@
 </div>
 
 <br>
-<table class="table">
+
+<h4>All Templates</h4>
+<div class="grid-container">
+    <div class="grid-item" *ngFor="let Item of data">
+      <p [innerHtml]="Item.originalTemplates | safe: 'html'"></p>
+      <button type="button" class="btn btn-success" (click)="redirectToDestination(allcategory, Item.id)">Select</button>
+    </div>
+  </div>
+  
+  
+<!-- <table class="table">
         <thead>
         <tr>
                 <th>ID</th>
@@ -31,11 +41,17 @@
                     </td>
                 </tr> 
         </tbody>
-</table>
+</table> -->
 
 <!-- <div [innerHtml]="htmlSnippet | safe: 'html'"></div> -->
-<h3>Professional templates</h3>
-<table class="table">
+<h4>Professional templates</h4>
+<div class="grid-container">
+    <div class="grid-item" *ngFor="let Item of professionaldata">
+      <p [innerHtml]="Item.originalTemplates | safe: 'html'"></p>
+      <button type="button" class="btn btn-success" (click)="redirectToDestination(professionalcategory, Item.id)">Select</button>
+    </div>
+  </div>
+<!-- <table class="table">
     <thead>
     <tr>
             <th>ID</th>
@@ -54,11 +70,17 @@
                 </td>
             </tr>
     </tbody>
-</table>
+</table> -->
 
 
-<h3>Friendly templates</h3>
-<table class="table">
+<h4>Friendly templates</h4>
+<div class="grid-container">
+    <div class="grid-item" *ngFor="let Item of friendlydata">
+      <p [innerHtml]="Item.originalTemplates | safe: 'html'"></p>
+      <button type="button" class="btn btn-success" (click)="redirectToDestination(friendlycategory, Item.id)">Select</button>
+    </div>
+  </div>
+<!-- <table class="table">
     <thead>
     <tr>
             <th>ID</th>
@@ -77,10 +99,16 @@
                 </td>
             </tr>
     </tbody>
-</table>
+</table> -->
 
-<h3>Modern templates</h3>
-<table class="table">
+<h4>Modern templates</h4>
+<div class="grid-container">
+    <div class="grid-item" *ngFor="let Item of moderndata">
+      <p [innerHtml]="Item.originalTemplates | safe: 'html'"></p>
+      <button type="button" class="btn btn-success" (click)="redirectToDestination(moderncategory, Item.id)">Select</button>
+    </div>
+  </div>
+<!-- <table class="table">
     <thead>
     <tr>
             <th>ID</th>
@@ -99,10 +127,16 @@
                 </td>
             </tr>
     </tbody>
-</table>
+</table> -->
 
-<h3>Elegant templates</h3>
-<table class="table">
+<h4>Elegant templates</h4>
+<div class="grid-container">
+    <div class="grid-item" *ngFor="let Item of elegantdata">
+      <p [innerHtml]="Item.originalTemplates | safe: 'html'"></p>
+      <button type="button" class="btn btn-success" (click)="redirectToDestination(elegantcategory, Item.id)">Select</button>
+    </div>
+  </div>
+<!-- <table class="table">
     <thead>
     <tr>
             <th>ID</th>
@@ -121,10 +155,16 @@
                 </td>
             </tr>
     </tbody>
-</table>
+</table> -->
 
-<h3>Creative templates</h3>
-<table class="table">
+<h4>Creative templates</h4>
+<div class="grid-container">
+    <div class="grid-item" *ngFor="let Item of creativedata">
+      <p [innerHtml]="Item.originalTemplates | safe: 'html'"></p>
+      <button type="button" class="btn btn-success" (click)="redirectToDestination(creativecategory, Item.id)">Select</button>
+    </div>
+  </div>
+<!-- <table class="table">
     <thead>
     <tr>
             <th>ID</th>
@@ -143,4 +183,4 @@
                 </td>
             </tr>
     </tbody>
-</table>
+</table> -->
