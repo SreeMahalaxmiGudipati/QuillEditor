@@ -1,7 +1,12 @@
 .register-container{
     font-family: "Times New Roman", Times, serif;
+    display:flex;
 }
-
+#CreateFromScratch{
+    height:40px;
+    margin-left:8%;
+    margin-top: 2%;
+}
 h1 {
     padding-left: 10%;
     display: block;

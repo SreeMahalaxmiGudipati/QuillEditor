@@ -92,6 +92,10 @@ export class AllTemplatesComponent {
    
   }
 
+  CreatefromScratch(){
+    this.router.navigate(['/summer']);
+  }
+
   getProfessionalTemplatesData()
   {
     this.professionalservice.getAllTemplates().subscribe((data: any)=>
