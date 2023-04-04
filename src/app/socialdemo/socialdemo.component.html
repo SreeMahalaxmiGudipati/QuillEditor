@@ -1,18 +1,11 @@
-
 <form [formGroup]="form">
     <div formArrayName="values">
       <div *ngFor="let control of valueControls; let i = index" >
-        <div *ngIf="fieldNames[i] != 'facebook'">
         <label class="fs-6" for="value{{i}}">{{fieldNames[i]}} : &nbsp; &nbsp; &nbsp; &nbsp; </label>
-    </div>
-        <div *ngIf="fieldNames[i] == 'facebook'">
-        <i class="fab fa-{{fieldNames[i]}}"></i>
-    </div>
         <input type="text" [formControlName]="i" id="value{{i}}" (change)="onValueChange(i, control.value, i)">
       </div>
     </div>
   </form>
-
 <textarea id="summernote" [innerHTML]="editorContent" class="previous"></textarea>
 <p id="demo"></p>
 <br>
