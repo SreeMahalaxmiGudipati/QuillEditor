@@ -10,21 +10,21 @@ export class SocialdemoComponent {
   form!: FormGroup;
   values!: FormArray<FormControl>;
   editorContent!: string;
-  previewContent!:string;
-  SourcecodeInEditor!:string;
+  previewContent!: string;
+  SourcecodeInEditor!: string;
   input1!: string;
   //displayedInput! : string;
-  showButton=false;
+  showButton = false;
   dummy: string[] = [];
   fieldNames: string[] = [];
   ngOnInit(): void {
     const pattern = /{{\s*(\w+)\s*}}/g;
     console.log(this.showButton);
-    if(this.showButton){
+    if (this.showButton) {
       console.log("Hello");
     }
-//dymaic lables
-let template=`
+    //dymaic lables
+    let template = `
   <div style="display: flex; align-items: center;">
   <img src="{{ imageUrl }}" alt="User Image" height="120px" style="margin-right: 10px;">
   <div>
@@ -60,23 +60,23 @@ let template=`
     $('#summernote').summernote(
       {
         callbacks: {
-          onInit: function() {
-        $('#summernote').summernote('code', template1);
-        $('#summernote').summernote('disable');
+          onInit: function () {
+            $('#summernote').summernote('code', template1);
+            $('#summernote').summernote('disable');
           },
           onChange: (content: string, $editable: any) => {
-           $('#preview').html(content);
-           this.previewContent = $('#preview').val(content);
-          const storageString = JSON.stringify(this.previewContent);
-          localStorage.setItem('Preview Content', storageString);
+            $('#preview').html(content);
+            this.previewContent = $('#preview').val(content);
+            const storageString = JSON.stringify(this.previewContent);
+            localStorage.setItem('Preview Content', storageString);
           },
         },
-      height: 200,
-       width:800
+        height: 200,
+        width: 800
       },
-      );
+    );
   }
-  
+
   onValueChange(index: number, value: string, fieldIndex: number) {
 
     let IconCode = '<a href="{{ displayInput }}"><i class="fab fa-facebook"></i></a>';
@@ -94,7 +94,7 @@ let template=`
           </div>
         </div>
       </div>`
-      let template2 = `
+    let template2 = `
       <div style="display: flex; align-items: center;">
         <img src="{{ imageUrl }}" alt="User Image" height="120px" style="margin-right: 10px;">
         <div>
@@ -106,33 +106,26 @@ let template=`
           </div>
         </div>
       </div>`
-       
+
     const matches = template1.match(pattern);
-    console.log("MATCHES :",matches);
+    console.log("MATCHES :", matches);
     if (matches) {
       matches.forEach((match) => {
         const variable = match.replace('{{', '').replace('}}', '').trim();
         this.fieldNames.push(variable);
-  console.log("variable",variable);
-  
-  if (variable == 'displayInput' && match == '{{ displayInput }}' && fieldIndex === this.fieldNames.indexOf('displayInput'))
-  {
-    console.log("displayInput entered");
-    console.log(IconCode);
-    
+        console.log("variable", variable);
+        if (variable == 'displayInput' && match == '{{ displayInput }}' && fieldIndex === this.fieldNames.indexOf('displayInput')) {
+          console.log("displayInput entered");
+          console.log(IconCode);
 
-  const iconCode = '<a href="' + value + '"><i class="fab fa-facebook"></i></a>';
-      $('#op-facebook').html(iconCode);
-      template2 = template2.replace(match, $('#op-facebook').html());
-     
+          const iconCode = '<a href="' + value + '"><i class="fab fa-facebook"></i></a>';
+          $('#op-facebook').html(iconCode);
+          template2 = template2.replace(match, $('#op-facebook').html());
 
-  // template2 = template2.replace('{{ displayInput }}', IconCode);
- 
+          // template2 = template2.replace('{{ displayInput }}', IconCode);
+          // document.getElementById('op-facebook')!.innerHTML = IconCode;
 
-// document.getElementById('op-facebook')!.innerHTML = IconCode;
-
-  }
-
+        }
 
         if (variable === this.fieldNames[index]) {
           console.log(variable);
@@ -140,34 +133,34 @@ let template=`
           $('#summernote').summernote('code', template2);
         }
         else {
+
           console.log(match);
           const controlIndex = this.fieldNames.findIndex(name => name === variable);
-        //  console.log(controlIndex);
+          //  console.log(controlIndex);
           const controlValue = this.valueControls[controlIndex].value;
-       //   console.log(controlValue);
+          //   console.log(controlValue);
           template2 = template2.replace(match, controlValue);
         }
       });
     }
 
-    if ($('#op-facebook').html() !== '')
-     {
+    if ($('#op-facebook').html() !== '') {
       const iconCode = '<a href="' + value + '"><i class="fab fa-facebook"></i></a>';
       $('#op-facebook').html(iconCode);
 
-    template2 = template2.replace('{{ displayInput }}', $('#op-facebook').html());
+      template2 = template2.replace('{{ displayInput }}', $('#op-facebook').html());
 
-    } 
+    }
     else {
       template2 = template2.replace('{{ displayInput }}', '');
     }
-   
+
     $('#summernote').summernote('code', template2);
   }
 
 
   initializeForm() {
-    let template=`
+    let template = `
   <div style="display: flex; align-items: center;">
   <img src="{{ imageUrl }}" alt="User Image" height="120px" style="margin-right: 10px;">
   <div>
@@ -179,7 +172,7 @@ let template=`
     </div>
   </div>
 </div>`
-   const interpolationTagsCount = (template.match(/\{\{[^{}]+\}\}/g) || []).length;
+    const interpolationTagsCount = (template.match(/\{\{[^{}]+\}\}/g) || []).length;
     this.values = new FormArray<FormControl>([]);
     for (let i = 0; i < interpolationTagsCount; i++) {
       this.values.push(new FormControl(''));
