@@ -11,6 +11,7 @@ import { PreviewComponent } from './preview/preview.component';
 import { Register1Component } from './register1/register1.component';
 import { SummernoteEditorComponent } from './summernote-editor/summernote-editor.component';
 import { SummernoteComponent } from './summernote/summernote.component';
+import { SocialdemoComponent } from './socialdemo/socialdemo.component';
 
 const routes: Routes = [
   {path:'editor',component:EditorComponent},
@@ -26,7 +27,9 @@ const routes: Routes = [
   {path:'formgenerate/:id',component:FormGenerateComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:Register1Component},
-  {path:'both1',component:BackupformComponent}
+  {path:'both1',component:BackupformComponent},
+  {path:'social',component:SocialdemoComponent}
+
 ];
 
 @NgModule({

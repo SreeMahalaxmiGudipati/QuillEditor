@@ -24,6 +24,7 @@ import { ProfessionalService } from './professional.service';
 import { ModernService } from './modern.service';
 import { ElegantService } from './elegant.service';
 import { CreativeService } from './creative.service';
+import { SocialdemoComponent } from './socialdemo/socialdemo.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { CreativeService } from './creative.service';
     LoginComponent,
     Register1Component,
     AllTemplatesComponent,
-    SafePipe
+    SafePipe,
+    SocialdemoComponent
   ],
   imports: [
     BrowserModule,
