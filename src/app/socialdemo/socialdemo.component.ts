@@ -118,6 +118,10 @@ export class SocialdemoComponent {
           console.log("displayInput entered");
           console.log(IconCode);
 
+          // let el = $("<div><code>" + IconCode + "</code></div>");
+          // $('#op-facebook').empty().append(el);
+          // $('#InHTML').empty().append(el);
+          
           const iconCode = '<a href="' + value + '"><i class="fab fa-facebook"></i></a>';
           $('#op-facebook').html(iconCode);
           template2 = template2.replace(match, $('#op-facebook').html());
